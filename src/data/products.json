@@ -1,0 +1,112 @@
+[
+    {
+        "name":"Paz de FLM Cabernet Franc",
+        "stock":10,
+        "cost":730,
+        "description":"De color violeta brillante. Sabor intenso a ciruelas maduras acompañado de notas de café tostado y chocolate, de textura suave y larga permanencia en boca.",
+        "discount":0,
+        "capacity":750,
+        "image":["https://www.fullescabio.com/productos/1600386131337/01_1629833163.webp?v=2215621"],
+        "sales":0,
+        "categoryId": 1
+    },
+    {
+        "name":"Paz de FLM Malbec",
+        "stock":16,
+        "cost":730,
+        "description":"Cosecha manual en cajas plásticas de 20 kg. Descobajado. Selección de bayas. Fermentación clásica conjunta con levaduras seleccionadas. Tanque fermentador rotativo. Prensado neumático. Fermentación maloláctica natural. Auto-clarificación y trasiego de desborre.",
+        "discount":0,
+        "capacity":750,
+        "image":["https://www.fullescabio.com/productos/1600386131336/01_1600819965.webp?v=2215621"],
+        "sales":0,
+        "categoryId": 1
+    },
+    {
+        "name":"Omnium Malbec",
+        "stock":16,
+        "cost":250,
+        "description":"Vino joven de color violáceo intenso, limpio y brillante. Buena percepción aromática de ciruelas y fruta roja. Taninos suaves y maduros. Final armónico y redondo. ",
+        "discount":0,
+        "capacity":750,
+        "image":["https://www.fullescabio.com/productos/1600386131328/01_1600818527.webp?v=2215621"],
+        "sales":0,
+        "categoryId": 1
+    },
+    {
+        "name":"Nicasia Vineyards Red Blend Malec (x2)",
+        "stock":16,
+        "cost":2660,
+        "description":"Se perciben en este vino intensos y dulces sabores a ciruelas y moras maduras aportados por el Malbec, junto a sutiles notas especiadas conferidos por el Cabernet Sauvignon y el Petit Verdot. El paso por roble incrementa aún más la complejidad de este vino, otorgando ligeras notas de vanilla y café. La particular voluptuosidad y dulzor de este vino permiten acompañarlo con carré de cerdo a la miel, tagine de cordero y ciruelas o lomo a la naranja. Varietal: 90% Malbec, 6% Cabernet Sauvignon, 4% Petit Verdot Fermentación: Máx. Ferm. Temp. 28º C durante 11 días. 18 días de maceración. Fermentación maloláctica completa. Añejamiento: 12 meses en roble francés (100% nuevo)",
+        "discount":0,
+        "capacity":750,
+        "image":["https://www.fullescabio.com/productos/1600386131324/01_1600817765.webp?v=2215621"],
+        "sales":0,
+        "categoryId": 1
+    },
+    {
+        "name":"Nicasia Malbec Red Blend",
+        "stock":16,
+        "cost":1000,
+        "description":"Se perciben en este vino intensos y dulces sabores a ciruelas y moras maduras aportados por el Malbec, junto a sutiles notas especiadas conferidos por el Cabernet Sauvignon y el Petit Verdot. El paso por roble incrementa aún más la complejidad de este vino, otorgando ligeras notas de vanilla y café. La particular voluptuosidad y dulzor de este vino permiten acompañarlo con carré de cerdo a la miel, tagine de cordero y ciruelas o lomo a la naranja",
+        "discount":0,
+        "capacity":750,
+        "image":["https://www.fullescabio.com/productos/1600386131323/01_1600817678.webp"],
+        "sales":0,
+        "categoryId": 1
+    },
+    {
+        "name":"Nicasia Cab. Franc-Merlot",
+        "stock":16,
+        "cost":1000,
+        "description":"Se perciben en este vino elegantes notas herbáceas y de anís aportadas por el Cabernet Franc, junto a vivaces frutos negros y especias conferidos por el Merlot y el Petit Verdot. El paso por roble incrementa aún más la complejidad de este vino, otorgando delicados toques ahumados y de tostado.",
+        "discount":0,
+        "capacity":750,
+        "image":["https://www.fullescabio.com/productos/1600386131322/01_1600817614.webp?v=2215621"],
+        "sales":0,
+        "categoryId": 1
+    },
+    {
+        "name":"Luigui Bosca Malbec",
+        "stock":16,
+        "cost":1050,
+        "description":"Luigi Bosca Malbec es un tinto de color rojo violáceo brillante. Sus aromas son intensos y amables, con notas que recuerdan a frutas rojas, y tonos algo florales y espe­ciados.En boca es generoso, fluido y expresivo, con tani­nos incipientes. De paladar franco y paso refrescante, con buen cuerpo y carácter. Su final es profundo y nítido, con la crianza totalmente integrada. Es un vino insignia de la variedad y con buen potencial de guarda.",
+        "discount":0,
+        "capacity":750,
+        "image":["https://www.fullescabio.com/productos/1600386131304/01_1600813148.webp?v=2215621"],
+        "sales":0,
+        "categoryId": 1
+    },
+    {
+        "name":"Luigui Bosca Cabernet Sauvignon",
+        "stock":16,
+        "cost":970,
+        "description":"Luigi Bosca Cabernet Sauvignon es un tinto de color rojo rubí profundo y brillante. Sus aromas son sutiles y equi­librados, con notas de frutos negros, especias y cuero. En boca es jugoso y expresivo, con taninos finos y firmes que se agarran. De paladar franco y fresco, con buen cuerpo y carácter vivaz, y final profundo en el que se aprecian los ahumados de la crianza en barricas de roble. Es un vino referente del varietal, con gran potencial de guarda.",
+        "discount":0,
+        "capacity":750,
+        "image":["https://www.fullescabio.com/productos/1600386131302/01_1600813029.webp?v=2215621"],
+        "sales":0,
+        "categoryId": 1
+    },
+    {
+        "name":"Los Medanos Malbec",
+        "stock":16,
+        "cost":430,
+        "description":"Color púrpura profundo con reflejos azulados. Intensos aromas a frutas rojas y negras como cereza, casis y mora. La crianza en roble francés aporta notas de tabaco y chocolate.",
+        "discount":0,
+        "capacity":750,
+        "image":["https://www.fullescabio.com/productos/1600386131300/01_1600812885.webp?v=2215621"],
+        "sales":0,
+        "categoryId": 1
+    },
+    {
+        "name":"Los medanos Cab. Suavignon",
+        "stock":16,
+        "cost":430,
+        "description":"Color rojo violáceo, con notas rubias. Aroma a frutos rojos,ciruela y flores rojas. En boca tiene buena estructura, equilibrado, con notas de roble francés y franco sabor especiado. Ideal para acompañar carnes rojas, de caza y platos bien condimentados.",
+        "discount":0,
+        "capacity":750,
+        "image":["https://www.fullescabio.com/productos/1600386131298/01_1600812767.webp?v=2215621"],
+        "sales":0,
+        "categoryId": 1
+    }
+]
