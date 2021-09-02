@@ -6,6 +6,8 @@ const { bulkCreateProducts } = require('./src/controllers/productsLoader');
 
 const force = (process.env.FORCE || false);
 
+const test = null;
+
 conn.sync({ force })
     .then(async () => force ? await bulkCreateCategories() : null)
     .then(async () => force ? await bulkCreateProducts(): null)
