@@ -26,7 +26,7 @@ async function getProducts(req, res) {
                     category: elem.category.name
                 }
             });
-                        
+
             if (products.length) return res.send(products);
             return res.status(404).send('Product not found');
 
@@ -56,8 +56,38 @@ async function getProducts(req, res) {
 }
 
 
+async function getProductById(req, res) {
+    const { id } = req.params;
+    try {
+        if (id) {
+            let productById = await Product.findByPk(id,
+                {
+                    include: ["category"],
+                })
+
+            productById = {
+                id: productById.id,
+                name: productById.name,
+                cost: productById.cost,
+                discount: productById.discount,
+                image: productById.image,
+                category: productById.category.name
+            }
+            return res.send(productById)
+        }
+
+
+    } catch (err) {
+        console.log('ERROR in getProductById', err);
+    }
+}
+
+
+
+
 
 
 module.exports = {
-    getProducts
+    getProducts,
+    getProductById
 }
