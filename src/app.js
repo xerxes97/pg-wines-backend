@@ -1,4 +1,6 @@
 require('dotenv').config();
+const routes = require('./routes');
+
 
 const express = require('express');
 const morgan = require('morgan');
@@ -18,5 +20,9 @@ server.use((req, res, next) => {
   res.header('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, DELETE');
   next();
 });
+
+
+server.use('/', routes);
+
 
 module.exports = server;
