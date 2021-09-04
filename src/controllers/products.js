@@ -2,53 +2,28 @@ const { Product, Category } = require('../db');
 const { Op } = require("sequelize");
 
 async function getProducts(req, res) {
-    const { name } = req.query;
+    const { name, category } = req.query;
     try {
+        let products = await Product.findAll({
+            include: ["category"],
+        })
+        products = products.map(elem => {
+            return {
+                id: elem.id,
+                name: elem.name,
+                cost: elem.cost,
+                discount: elem.discount,
+                image: 'https://digitalyactual.com/delsur/'+elem.image[0]+'.jpg',
+                category: elem.category.name
+            }
+        });
         if (name) {
-            let products = await Product.findAll({
-                where: {
-                    name: { [Op.iLike]: `%${name}%` }
-                },
-                include: ["category"],
-            })
-
-            products = products.map(elem => {
-                return {
-                    id: elem.id,
-                    name: elem.name,
-                    // stock: elem.stock,
-                    cost: elem.cost,
-                    // description: elem.description,
-                    discount: elem.discount,
-                    // capacity: elem.capacity,
-                    image: 'https://digitalyactual.com/delsur/'+elem.image[0]+'.jpg',
-                    // sales: elem.sales,
-                    category: elem.category.name
-                }
-            });
-
-            if (products.length) return res.send(products);
-            return res.status(404).send('Product not found');
-
+            const byName = products.filter(elem => elem.name.toLowerCase().includes(name.toLocaleLowerCase()));
+            byName.length ? 
+                res.status(200).send(byName) :
+                res.status(404).send([{error: 'No results found'}]); 
         } else {
-            let products = await Product.findAll({
-                include: ["category"],
-            })
-            products = products.map(elem => {
-                return {
-                    id: elem.id,
-                    name: elem.name,
-                    // stock: elem.stock,
-                    cost: elem.cost,
-                    // description: elem.description,
-                    discount: elem.discount,
-                    // capacity: elem.capacity,
-                    image: 'https://digitalyactual.com/delsur/'+elem.image[0]+'.jpg',
-                    // sales: elem.sales,
-                    category: elem.category.name
-                }
-            });
-            return res.send(products);
+            res.status(200).send(products);
         }
     } catch (err) {
         console.log('ERROR in getProducts', err);
@@ -82,7 +57,9 @@ async function getProductById(req, res) {
     }
 }
 
-
+async function getProductByCategory(req, res) {
+    
+}
 
 
 
