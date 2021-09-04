@@ -21,13 +21,13 @@ async function getProducts(req, res) {
             const byName = products.filter(elem => elem.name.toLowerCase().includes(name.toLocaleLowerCase()));
             byName.length ? 
             res.status(200).send(byName) :
-            res.status(404).send([{error: 'No results found'}]); 
+            res.status(404).send({error: 'No results found'}); 
         } 
         if (category) {
             const byCategory = products.filter(elem => elem.category.toLowerCase().includes(category.toLocaleLowerCase()));
             byCategory.length ? 
                 res.status(200).send(byCategory) :
-                res.status(404).send([{error: 'No results found'}]); 
+                res.status(404).send({error: 'No results found'}); 
         } else {
             res.status(200).send(products);
         }
