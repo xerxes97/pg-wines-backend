@@ -63,27 +63,29 @@ async function getProductById(req, res) {
     }
 }
 
-// async function postProduct(req, res) {
-//     const {name, stock, cost, description, discount, capacity, image, sales} = req.body;
-//     try {
-//         if(name && cost && capacity && image) {
-//             const createdProduct = await Product.create({
-//                 name,
-//                 stock,
-//                 cost,
-//                 description,
-//                 discount,
-//                 capacity,
-//                 image,
-//                 sales
-//             });
-//         } else {
-//             res.status(422).send([{error: 'Unprocessable Entity'}])
-//         }   
-//     } catch (error) {
-//         console.log('ERROR in getProductById', err);
-//     }
-// }
+async function postProduct(req, res) {
+    const {name, stock, cost, description, discount, capacity, image, sales, categoryId} = req.body;
+    try {
+        if(name && cost && capacity && image) {
+            const createdProduct = await Product.create({
+                name,
+                stock,
+                cost,
+                description,
+                discount,
+                capacity,
+                image,
+                sales
+            }); 
+            await createdProduct.setCategory(categoryId);
+            res.send(createdProduct);
+        } else {
+            res.status(422).send([{error: 'Unprocessable Entity'}])
+        }   
+    } catch (err) {
+        console.log('ERROR in postProduct', err);
+    }
+}
 
 
 
@@ -91,4 +93,5 @@ async function getProductById(req, res) {
 module.exports = {
     getProducts,
     getProductById,
+    postProduct
 }

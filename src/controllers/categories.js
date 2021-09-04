@@ -20,8 +20,8 @@ async function postCategory(req, res) {
     const {name} = req.body;
     try {
         if(name) {
-            const createdCategory = await Category.create({
-                name
+            const createdCategory = await Category.findOrCreate({
+                where: { name: name }
             });
             res.send(createdCategory);
         } else {
