@@ -25,7 +25,7 @@ async function postCategory(req, res) {
             });
             res.send(createdCategory);
         } else {
-            res.status(422).send([{error: 'Unprocessable Entity'}])
+            res.status(422).send({error: 'Unprocessable Entity'})
         }   
     } catch (error) {
         console.log('ERROR in postCategory', err);
