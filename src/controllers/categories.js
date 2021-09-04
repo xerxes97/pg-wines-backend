@@ -16,8 +16,24 @@ async function getCategories(req, res) {
     }
 }
 
+async function postCategory(req, res) {
+    const {name} = req.body;
+    try {
+        if(name) {
+            const createdCategory = await Category.create({
+                name
+            });
+            res.send(createdCategory);
+        } else {
+            res.status(422).send([{error: 'Unprocessable Entity'}])
+        }   
+    } catch (error) {
+        console.log('ERROR in postCategory', err);
+    }
+}
 
 
 module.exports = {
-    getCategories
+    getCategories,
+    postCategory
 } 

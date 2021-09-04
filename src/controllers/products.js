@@ -63,14 +63,32 @@ async function getProductById(req, res) {
     }
 }
 
-async function getProductByCategory(req, res) {
-    
-}
+// async function postProduct(req, res) {
+//     const {name, stock, cost, description, discount, capacity, image, sales} = req.body;
+//     try {
+//         if(name && cost && capacity && image) {
+//             const createdProduct = await Product.create({
+//                 name,
+//                 stock,
+//                 cost,
+//                 description,
+//                 discount,
+//                 capacity,
+//                 image,
+//                 sales
+//             });
+//         } else {
+//             res.status(422).send([{error: 'Unprocessable Entity'}])
+//         }   
+//     } catch (error) {
+//         console.log('ERROR in getProductById', err);
+//     }
+// }
 
 
 
 
 module.exports = {
     getProducts,
-    getProductById
+    getProductById,
 }
