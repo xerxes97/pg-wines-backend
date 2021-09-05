@@ -1,5 +1,4 @@
-const { Product, Category } = require('../db');
-const { Op } = require("sequelize");
+const { Product} = require('../db');
 
 async function getProducts(req, res) {
     const { name, category } = req.query;
@@ -87,11 +86,53 @@ async function postProduct(req, res) {
     }
 }
 
+async function updateProduct(req, res, next) {  
+    const { name, stock, cost, description, discount, capacity, image, sales, id, category } = req.body;
+    if (!id) return next({ message: 'El id del producto es requerido'})
+    try {
+        const product = await Product.findByPk(id)
+        if (!product) return next({ message: 'El id del producto es incorrecto'})
+        if (name) { product.name = name }
+        if (description) { product.description = description }
+        if (stock) { product.stock = stock}
+        if (cost) { product.cost = cost }
+        if (discount) { product.discount = discount }
+        if (capacity) { product.capacity = capacity }
+        if (image) { product.price = image }
+        if (sales) { product.sales = sales }
+        if (category) { product.categoryId=category}
+        await product.save()
+        // console.log (product);
+        return res.send('El producto ha sido actualizado');
+    } catch (error) {
+        next({message: 'Algo salio mal con la modificacion del producto'})
+    }
+}
+async function deleteProduct(req, res, next) {
+    const { id } = req.body;
+    if (!id) return res.send('El id del producto es requerido')  
+    const prod= await Product.findByPk(id)
+    if(!prod)return res.send('El producto no existe')
+    try {
+        await Product.destroy({
+            where: {
+                id
+            }
+        })
+        return res.send('El producto fue borrado con éxito')
+    } catch (error) {
+        res.send('Hubo un error en la eliminación del producto');
+    }
+}
+
+
 
 
 
 module.exports = {
     getProducts,
     getProductById,
-    postProduct
+    postProduct,
+    updateProduct,
+    deleteProduct
 }
