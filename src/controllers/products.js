@@ -1,4 +1,4 @@
-const { Product} = require('../db');
+const { Product } = require('../db');
 
 async function getProducts(req, res) {
     const { name, categoryName, categoryId } = req.query;
@@ -51,7 +51,7 @@ async function getProductById(req, res) {
                 description: productById.description,
                 discount: productById.discount,
                 capacity: productById.capacity,
-                image: 'https://digitalyactual.com/delsur/'+productById.image[0]+'.jpg',
+                image: 'https://digitalyactual.com/delsur/' + productById.image[0] + '.jpg',
                 sales: productById.sales,
                 category: productById.category.name
             }
@@ -65,9 +65,9 @@ async function getProductById(req, res) {
 }
 
 async function postProduct(req, res) {
-    const {name, stock, cost, description, discount, capacity, image, sales, categoryId} = req.body;
+    const { name, stock, cost, description, discount, capacity, image, sales, categoryId } = req.body;
     try {
-        if(name && cost && capacity && image) {
+        if (name && cost && capacity && image) {
             const createdProduct = await Product.create({
                 name,
                 stock,
@@ -77,53 +77,52 @@ async function postProduct(req, res) {
                 capacity,
                 image,
                 sales
-            }); 
+            });
             await createdProduct.setCategory(categoryId);
             res.send(createdProduct);
         } else {
-            res.status(422).send([{error: 'Unprocessable Entity'}])
-        }   
+            res.status(422).send({ error: 'These data are required: name, cost, capacity, image' })
+        }
     } catch (err) {
         console.log('ERROR in postProduct', err);
     }
 }
 
-async function updateProduct(req, res, next) {  
+async function updateProduct(req, res) {
     const { name, stock, cost, description, discount, capacity, image, sales, id, category } = req.body;
-    if (!id) return next({ message: 'El id del producto es requerido'})
+    if (!id) return res.status(422).send({ error: 'The product id is required' })
     try {
         const product = await Product.findByPk(id)
-        if (!product) return next({ message: 'El id del producto es incorrecto'})
+        if (!product) return res.status(422).send({ error: 'The product id is wrong' })
         if (name) { product.name = name }
         if (description) { product.description = description }
-        if (stock) { product.stock = stock}
+        if (stock) { product.stock = stock }
         if (cost) { product.cost = cost }
         if (discount) { product.discount = discount }
         if (capacity) { product.capacity = capacity }
         if (image) { product.price = image }
         if (sales) { product.sales = sales }
-        if (category) { product.categoryId=category}
+        if (category) { product.categoryId = category }
         await product.save()
-        // console.log (product);
-        return res.send('El producto ha sido actualizado');
-    } catch (error) {
-        next({message: 'Algo salio mal con la modificacion del producto'})
+        return res.send('The product has been updated suscesfully');
+    } catch (err) {
+        console.log('ERROR in updateProduct', err);
     }
 }
-async function deleteProduct(req, res, next) {
+async function deleteProduct(req, res) {
     const { id } = req.body;
-    if (!id) return res.send('El id del producto es requerido')  
-    const prod= await Product.findByPk(id)
-    if(!prod)return res.send('El producto no existe')
+    if (!id) return res.send({ error: 'The product id is required' })
+    const prod = await Product.findByPk(id)
+    if (!prod) return res.send({ error: 'The product does not exist' })
     try {
         await Product.destroy({
             where: {
                 id
             }
         })
-        return res.send('El producto fue borrado con éxito')
-    } catch (error) {
-        res.send('Hubo un error en la eliminación del producto');
+        return res.send('The product was removed successfully')
+    } catch (err) {
+        console.log('ERROR in deleteProduct', err);
     }
 }
 

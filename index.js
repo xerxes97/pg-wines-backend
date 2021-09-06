@@ -13,7 +13,9 @@ conn.sync({ force })
     .then(async () => force ? await bulkCreateProducts(): null)
     .then(() => {
         server.listen(3001, () => {
-            console.log('%s listening at 3001');
+            console.log('Server listening at 3001');
         });
     })
     .catch(e => console.log('ERROR :( ' + e));
+
+
