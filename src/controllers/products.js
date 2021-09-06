@@ -1,7 +1,7 @@
 const { Product } = require('../db');
 
 async function getProducts(req, res) {
-    const { name, category } = req.query;
+    const { name, categoryName, categoryId } = req.query;
     try {
         let products = await Product.findAll({
             include: ["category"],
@@ -12,24 +12,22 @@ async function getProducts(req, res) {
                 name: elem.name,
                 cost: elem.cost,
                 discount: elem.discount,
-                image: 'https://digitalyactual.com/delsur/' + elem.image[0] + '.jpg',
-                category: elem.category.name
+                image: 'https://digitalyactual.com/delsur/'+elem.image[0]+'.jpg',
+                categoryId: elem.category.id,
+                categoryName: elem.category.name
             }
         });
         if (name) {
-            const byName = products.filter(elem => elem.name.toLowerCase().includes(name.toLocaleLowerCase()));
-            byName.length ?
-                res.status(200).send(byName) :
-                res.status(404).send({ error: 'No results found' });
+            products = products.filter(elem => elem.name.toLowerCase().includes(name.toLocaleLowerCase()));
+        } 
+        if (categoryName) {
+            products = products.filter(elem => elem.categoryName.toLowerCase().includes(category.toLocaleLowerCase()));
         }
-        if (category) {
-            const byCategory = products.filter(elem => elem.category.toLowerCase().includes(category.toLocaleLowerCase()));
-            byCategory.length ?
-                res.status(200).send(byCategory) :
-                res.status(404).send({ error: 'No results found' });
-        } else {
-            res.status(200).send(products);
+        if (categoryId) {
+            products = products.filter(elem => elem.categoryId === parseInt(categoryId));
         }
+        products.length ? 
+            res.status(200).send(products) : res.status(404).send({error: 'No results found'}); 
     } catch (err) {
         console.log('ERROR in getProducts', err);
     }
