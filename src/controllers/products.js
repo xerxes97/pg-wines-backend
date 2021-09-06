@@ -48,9 +48,13 @@ async function getProductById(req, res) {
             productById = {
                 id: productById.id,
                 name: productById.name,
+                stock: productById.stock,
                 cost: productById.cost,
+                description: productById.description,
                 discount: productById.discount,
+                capacity: productById.capacity,
                 image: 'https://digitalyactual.com/delsur/'+productById.image[0]+'.jpg',
+                sales: productById.sales,
                 category: productById.category.name
             }
             return res.send(productById)
