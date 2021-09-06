@@ -2,14 +2,7 @@ const { Category } = require('../db');
 
 async function getCategories(req, res) {
     try {
-        const categories = await Category.findAll({
-            // attributes: ['id', 'name'],   
-            // include: {
-            //     model: Category,
-            //     attributes: ['name'],
-            //     through: { attributes: [] }
-            // }
-        })
+        const categories = await Category.findAll()
         return res.send(categories);
     } catch (err) {
         console.log('ERROR in getCategories', err);
@@ -17,17 +10,17 @@ async function getCategories(req, res) {
 }
 
 async function postCategory(req, res) {
-    const {name} = req.body;
+    const { name } = req.body;
     try {
-        if(name) {
+        if (name) {
             const createdCategory = await Category.findOrCreate({
                 where: { name: name }
             });
             res.send(createdCategory);
         } else {
-            res.status(422).send({error: 'Unprocessable Entity'})
-        }   
-    } catch (error) {
+            res.status(422).send({ error: 'Name is required' })
+        }
+    } catch (err) {
         console.log('ERROR in postCategory', err);
     }
 }
@@ -36,4 +29,4 @@ async function postCategory(req, res) {
 module.exports = {
     getCategories,
     postCategory
-} 
+}
