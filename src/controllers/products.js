@@ -21,7 +21,7 @@ async function getProducts(req, res) {
             products = products.filter(elem => elem.name.toLowerCase().includes(name.toLocaleLowerCase()));
         } 
         if (categoryName) {
-            products = products.filter(elem => elem.categoryName.toLowerCase().includes(category.toLocaleLowerCase()));
+            products = products.filter(elem => elem.categoryName.toLowerCase().includes(categoryName.toLocaleLowerCase()));
         }
         if (categoryId) {
             products = products.filter(elem => elem.categoryId === parseInt(categoryId));
@@ -89,11 +89,14 @@ async function postProduct(req, res) {
 }
 
 async function updateProduct(req, res) {
-    const { name, stock, cost, description, discount, capacity, image, sales, id, category } = req.body;
-    if (!id) return res.status(422).send({ error: 'The product id is required' })
+    const { name, stock, cost, description, discount, capacity, image, sales, id, categoryId } = req.body;
+    if (!id) return res.status(422).send({ error: 'The product id is required' });
+    if (!name && !stock && !cost && !description && !discount && !capacity && !image && !sales && !categoryId) {
+        return res.status(422).send({ error: 'You should specified at least one valid field.' });
+    }
     try {
-        const product = await Product.findByPk(id)
-        if (!product) return res.status(422).send({ error: 'The product id is wrong' })
+        const product = await Product.findByPk(id);
+        if (!product) return res.status(422).send({ error: 'The product id is wrong' });
         if (name) { product.name = name }
         if (description) { product.description = description }
         if (stock) { product.stock = stock }
@@ -102,8 +105,8 @@ async function updateProduct(req, res) {
         if (capacity) { product.capacity = capacity }
         if (image) { product.price = image }
         if (sales) { product.sales = sales }
-        if (category) { product.categoryId = category }
-        await product.save()
+        if (categoryId) { product.categoryId = categoryId }
+        await product.save();
         return res.send('The product has been updated suscesfully');
     } catch (err) {
         console.log('ERROR in updateProduct', err);
