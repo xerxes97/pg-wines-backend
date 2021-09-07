@@ -37,30 +37,28 @@ async function getProducts(req, res) {
 async function getProductById(req, res) {
     const { id } = req.params;
     try {
-        if (id) {
-            let productById = await Product.findByPk(id,
-                {
-                    include: ["category"],
-                })
+        if (!id) return res.status(422).send({ error: 'The product id is required' });
+        let productById = await Product.findByPk(id,
+            {
+                include: ["category"],
+            })
 
-            productById = {
-                id: productById.id,
-                name: productById.name,
-                stock: productById.stock,
-                cost: productById.cost,
-                description: productById.description,
-                discount: productById.discount,
-                capacity: productById.capacity,
-                image: 'https://digitalyactual.com/delsur/' + productById.image[0] + '.jpg',
-                sales: productById.sales,
-                category: productById.category.name
-            }
-            return res.send(productById)
+        productById = {
+            id: productById.id,
+            name: productById.name,
+            stock: productById.stock,
+            cost: productById.cost,
+            description: productById.description,
+            discount: productById.discount,
+            capacity: productById.capacity,
+            image: 'https://digitalyactual.com/delsur/' + productById.image[0] + '.jpg',
+            sales: productById.sales,
+            category: productById.category.name
         }
-
-
+        return res.send(productById)
     } catch (err) {
         console.log('ERROR in getProductById', err);
+        res.status(404).send({ error: 'The product id is wrong' });
     }
 }
 
