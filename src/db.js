@@ -4,11 +4,26 @@ const fs = require('fs');
 const path = require('path');
 const { DB_USER, DB_PASSWORD, DB_HOST, DB_NAME } = process.env;
 
-const sequelize = new Sequelize(`postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}/${DB_NAME}`, {
-  logging: false, // set to console.log to see the raw SQL queries
-  native: false, // lets Sequelize know we can use pg-native for ~30% more speed
-  // define: { timestamps: false }   // Impido que se generen los campos automaticos de fecha y hora en la tabla en que se agregó un registro.
-});
+const devConfig = `postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}/${DB_NAME}`;
+const proConfig = process.env.DATABASE_URL; //heroku addons
+const connectionString = process.env.NODE_ENV === "production" ? proConfig : devConfig;
+const optionSequelize = process.env.NODE_ENV =="production" ? 
+  {
+    logging: false, // set to console.log to see the raw SQL queries
+    native: false, // lets Sequelize know we can use pg-native for ~30% more speed
+    dialect: "postgres",
+    dialectOptions: {
+      ssl: {
+        require: true, // This will help you. But you will see nwe error
+        rejectUnauthorized: false // This line will fix new error
+      }
+    }
+  } :
+  {
+    logging: false, // set to console.log to see the raw SQL queries
+    native: false, // lets Sequelize know we can use pg-native for ~30% more speed
+  }
+const sequelize = new Sequelize(connectionString, optionSequelize);
 
 const basename = path.basename(__filename);
 
