@@ -18,7 +18,7 @@ async function postCategory(req, res) {
             });
             res.send(createdCategory);
         } else {
-            res.status(422).send({ error: 'Name is required' })
+            res.status(422).send({ error: 'The field name is required' })
         }
     } catch (err) {
         console.log('ERROR in postCategory', err);
