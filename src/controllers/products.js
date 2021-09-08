@@ -1,33 +1,48 @@
-const { Product } = require('../db');
+const { Op } = require('sequelize');
+const { Product,Category } = require('../db');
+
+const itemsPerPage= 10;
+const exclude= ['createdAt', 'updatedAt','categoryId']
 
 async function getProducts(req, res) {
-    const { name, categoryName, categoryId } = req.query;
+    let { name, categoryId,page,orderBy,orderType} = req.query;
+    const validate = ['null', undefined, 'undefined', '']
+    if(validate.includes(name))name="";
+    if(validate.includes(categoryId))categoryId='';
+    if(validate.includes(orderBy))orderBy='name';
+    if(validate.includes(orderType))orderType='asc'
+    if(validate.includes(page))page=1;
     try {
-        let products = await Product.findAll({
-            include: ["category"],
+        const count = await Product.findAll({
+            where:{
+                name:{[Op.like]:`%${name}%`}
+            },
         })
-        products = products.map(elem => {
-            return {
-                id: elem.id,
-                name: elem.name,
-                cost: elem.cost,
-                discount: elem.discount,
-                image: 'https://digitalyactual.com/delsur/'+elem.image[0],
-                categoryId: elem.category.id,
-                categoryName: elem.category.name
-            }
-        });
-        if (name) {
-            products = products.filter(elem => elem.name.toLowerCase().includes(name.toLocaleLowerCase()));
-        } 
-        if (categoryName) {
-            products = products.filter(elem => elem.categoryName.toLowerCase().includes(categoryName.toLocaleLowerCase()));
-        }
-        if (categoryId) {
-            products = products.filter(elem => elem.categoryId === parseInt(categoryId));
-        }
-        products.length ? 
-            res.status(200).send(products) : res.status(404).send({error: 'No results found'}); 
+        const products = await Product.findAll({
+            where: {
+                name: { [Op.iLike]: `%${name}%` }
+            },
+            attributes: {
+                exclude
+            },
+            offset: (page - 1) * itemsPerPage,
+            limit: itemsPerPage,
+            include:[
+                {
+                    model: Category,
+                    where: categoryId ? {
+                        id: categoryId
+                    } : null,
+                    attributes: ['name', 'id']
+                }
+            ],
+            order:[[orderBy,orderType]]
+        })
+        products.map(prod=>{
+            let imgUrl=`https://digitalyactual.com/delsur/${prod.image[0]}.jpg`
+            prod.image[0]=imgUrl;
+        })
+        return res.status(200).send({totalPage:Math.ceil(count.length/itemsPerPage),products})
     } catch (err) {
         console.log('ERROR in getProducts', err);
     }
