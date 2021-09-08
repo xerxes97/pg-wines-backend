@@ -1,10 +1,10 @@
 const { Router } = require('express');
 const router = Router();
-const { getBrands, postBrands, updateBrands, deleteBrand } = require('../../controllers/brands')
+const { getBrands, postBrands, updateBrands, deleteBrands } = require('../../controllers/brands')
 
 router.get('/', getBrands);
 router.post('/', postBrands);
 router.put('/', updateBrands);
-router.delete('/', deleteBrand);
+router.delete('/', deleteBrands);
 
 module.exports = router;
