@@ -17,6 +17,14 @@ async function getProducts(req, res) {
             where:{
                 name:{[Op.like]:`%${name}%`}
             },
+            include:[
+                {
+                    model: Category,
+                    where: categoryId ? {
+                        id: categoryId
+                    } : null
+                }
+            ]
         })
         const products = await Product.findAll({
             where: {
