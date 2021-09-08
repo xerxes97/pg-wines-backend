@@ -41,11 +41,11 @@ async function updateBrands(req, res) {
     }
 }
 
-async function deleteBrand(req, res) {
+async function deleteBrands(req, res) {
     const { id } = req.body;
     if (!id) return res.send({ error: 'The brand id is required' })
     const brand = await Brand.findByPk(id)
-    if (!brand) return res.send({ error: 'The is not any brand with this id' })
+    if (!brand) return res.send({ error: 'There is not any brand with this id' })
     try {
         await Brand.destroy({
             where: {
@@ -62,5 +62,5 @@ module.exports = {
     getBrands,
     postBrands,
     updateBrands,
-    deleteBrand
+    deleteBrands
 }
