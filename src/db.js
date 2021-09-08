@@ -4,10 +4,26 @@ const fs = require('fs');
 const path = require('path');
 const { DB_USER, DB_PASSWORD, DB_HOST, DB_NAME } = process.env;
 
-const sequelize = new Sequelize(`postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}/${DB_NAME}`, {
-  logging: false, // set to console.log to see the raw SQL queries
-  native: false, // lets Sequelize know we can use pg-native for ~30% more speed
-});
+const devConfig = `postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}/${DB_NAME}`;
+const proConfig = process.env.DATABASE_URL; //heroku addons
+const connectionString = process.env.NODE_ENV === "production" ? proConfig : devConfig;
+const optionSequelize = process.env.NODE_ENV =="production" ? 
+  {
+    logging: false, // set to console.log to see the raw SQL queries
+    native: false, // lets Sequelize know we can use pg-native for ~30% more speed
+    dialect: "postgres",
+    dialectOptions: {
+      ssl: {
+        require: true, // This will help you. But you will see nwe error
+        rejectUnauthorized: false // This line will fix new error
+      }
+    }
+  } :
+  {
+    logging: false, // set to console.log to see the raw SQL queries
+    native: false, // lets Sequelize know we can use pg-native for ~30% more speed
+  }
+const sequelize = new Sequelize(connectionString, optionSequelize);
 
 const basename = path.basename(__filename);
 
@@ -29,11 +45,21 @@ sequelize.models = Object.fromEntries(capsEntries);
 
 // En sequelize.models están todos los modelos importados como propiedades
 // Para relacionarlos hacemos un destructuring
-const { Product, Category } = sequelize.models;
+const { Product, Category, Brand } = sequelize.models;
 
 // Aca vendrian las relaciones
+
 Category.hasMany(Product);
-Product.belongsTo(Category);
+Product.belongsTo(Category, {
+  foreignKey: "categoryId",
+  as: "category",
+});
+
+Brand.hasMany(Product);
+Product.belongsTo(Brand, {
+  foreignKey: "brandId",
+  as: "brand",
+});
 
 module.exports = {
   ...sequelize.models, // para poder importar los modelos así: const { Product, User } = require('./db.js');
