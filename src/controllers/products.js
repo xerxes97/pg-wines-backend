@@ -51,7 +51,7 @@ async function getProducts(req, res) {
             order:[[orderBy,orderType]]
         })
         products.map(prod=>{
-            let imgUrl=`https://digitalyactual.com/delsur/${prod.image[0]}.jpg`
+            let imgUrl=`https://digitalyactual.com/delsur/${prod.image[0]}`
             prod.image[0]=imgUrl;
         })
         return res.status(200).send({totalPage:Math.ceil(count.length/itemsPerPage),products})
