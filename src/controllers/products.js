@@ -5,17 +5,20 @@ const itemsPerPage= 10;
 const exclude= ['createdAt', 'updatedAt','categoryId']
 
 async function getProducts(req, res) {
-    let { name, categoryId,page,orderBy,orderType} = req.query;
+    let { name, categoryId,page,orderBy,orderType,initPrice,finalPrice} = req.query;
     const validate = ['null', undefined, 'undefined', '']
     if(validate.includes(name))name="";
     if(validate.includes(categoryId))categoryId='';
     if(validate.includes(orderBy))orderBy='name';
     if(validate.includes(orderType))orderType='asc'
     if(validate.includes(page))page=1;
+    if(validate.includes(initPrice))initPrice=0;
+    if(validate.includes(finalPrice))finalPrice=10000000;
     try {
         const count = await Product.findAll({
             where:{
-                name:{[Op.like]:`%${name}%`}
+                name:{[Op.like]:`%${name}%`},
+                cost: {[Op.between]:[initPrice,finalPrice]}
             },
             include:[
                 {
@@ -28,7 +31,8 @@ async function getProducts(req, res) {
         })
         const products = await Product.findAll({
             where: {
-                name: { [Op.iLike]: `%${name}%` }
+                name: { [Op.iLike]: `%${name}%` },
+                cost: {[Op.between]:[initialPrice,finalPrice]}
             },
             attributes: {
                 exclude
