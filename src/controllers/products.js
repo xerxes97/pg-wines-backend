@@ -12,7 +12,7 @@ async function getProducts(req, res) {
                 name: elem.name,
                 cost: elem.cost,
                 discount: elem.discount,
-                image: 'https://digitalyactual.com/delsur/'+elem.image[0]+'.jpg',
+                image: 'https://digitalyactual.com/delsur/'+elem.image[0],
                 categoryId: elem.category.id,
                 categoryName: elem.category.name
             }
@@ -51,7 +51,7 @@ async function getProductById(req, res) {
             description: productById.description,
             discount: productById.discount,
             capacity: productById.capacity,
-            image: 'https://digitalyactual.com/delsur/' + productById.image[0] + '.jpg',
+            image: 'https://digitalyactual.com/delsur/' + productById.image[0],
             sales: productById.sales,
             category: productById.category.name
         }
