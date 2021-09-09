@@ -4,7 +4,7 @@ const { getBrands, postBrands, updateBrands, deleteBrands } = require('../../con
 
 router.get('/', getBrands);
 router.post('/', postBrands);
-router.put('/', updateBrands);
-router.delete('/', deleteBrands);
+router.put('/update', updateBrands);
+router.delete('/delete', deleteBrands);
 
 module.exports = router;
