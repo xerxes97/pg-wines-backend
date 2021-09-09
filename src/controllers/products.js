@@ -67,9 +67,8 @@ async function getProductById(req, res) {
         if (!id) return res.status(422).send({ error: 'The product id is required' });
         let productById = await Product.findByPk(id,
             {
-                include: ["category"],
+                include: ["category", "brand", "packing"],
             })
-
         productById = {
             id: productById.id,
             name: productById.name,
@@ -78,9 +77,12 @@ async function getProductById(req, res) {
             description: productById.description,
             discount: productById.discount,
             capacity: productById.capacity,
-            image: 'https://digitalyactual.com/delsur/' + productById.image[0],
+            image: productById.image.lenght === 0 ? productById.image : 
+                            productById.image.map(elem => elem = 'https://digitalyactual.com/delsur/' + elem),
             sales: productById.sales,
-            category: productById.category.name
+            category: productById.category,
+            brand: productById.brand,
+            packing: productById.packing
         }
         return res.send(productById)
     } catch (err) {
@@ -90,10 +92,15 @@ async function getProductById(req, res) {
 }
 
 async function postProduct(req, res) {
-    const { name, stock, cost, description, discount, capacity, image, sales, categoryId } = req.body;
+    //required fields: name, cost, capacity, categoryId, brandId, packingId
+    //non required fields:  stock=0, description="", discount=0, image=[], sales=0, 
+    const { 
+        name, cost, capacity, categoryId, brandId, packingId,
+        stock, description, discount, image, sales 
+    } = req.body;
     try {
-        if (name && cost && capacity && image) {
-            const createdProduct = await Product.create({
+        if (name && cost && capacity && categoryId && brandId && packingId) {
+            var createdProduct = await Product.create({
                 name,
                 stock,
                 cost,
@@ -104,9 +111,11 @@ async function postProduct(req, res) {
                 sales
             });
             await createdProduct.setCategory(categoryId);
+            await createdProduct.setBrand(brandId);
+            await createdProduct.setPacking(packingId);
             res.send(createdProduct);
         } else {
-            res.status(422).send({ error: 'These data are required: name, cost, capacity, image' })
+            res.status(422).send({ error: 'These data are required: name, cost, capacity, categoryId, brandId, packingId' })
         }
     } catch (err) {
         console.log('ERROR in postProduct', err);
@@ -114,9 +123,14 @@ async function postProduct(req, res) {
 }
 
 async function updateProduct(req, res) {
-    const { name, stock, cost, description, discount, capacity, image, sales, id, categoryId } = req.body;
+    //required fields: name, cost, capacity, categoryId, brandId, packingId
+    //non required fields:  stock=0, description="", discount=0, image=[], sales=0, 
+    const { 
+        id, name, cost, capacity, categoryId, brandId, packingId,
+        stock, description, discount, image, sales
+    } = req.body;
     if (!id) return res.status(422).send({ error: 'The product id is required' });
-    if (!name && !stock && !cost && !description && !discount && !capacity && !image && !sales && !categoryId) {
+    if (!name && !stock && !cost && !description && !discount && !capacity && !image && !sales && !categoryId && !brandId && !packingId) {
         return res.status(422).send({ error: 'You should specified at least one valid field.' });
     }
     try {
@@ -131,6 +145,8 @@ async function updateProduct(req, res) {
         if (image) { product.price = image }
         if (sales) { product.sales = sales }
         if (categoryId) { product.categoryId = categoryId }
+        if (brandId) { product.brandId = brandId }
+        if (packingId) { product.packingId = packingId }
         await product.save();
         return res.send('The product has been updated suscesfully');
     } catch (err) {

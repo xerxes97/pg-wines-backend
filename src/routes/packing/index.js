@@ -4,7 +4,7 @@ const { getPacking, postPacking, updatePacking, deletePacking } = require('../..
 
 router.get('/', getPacking);
 router.post('/', postPacking);
-router.put('/', updatePacking);
-router.delete('/', deletePacking);
+router.put('/update', updatePacking);
+router.delete('/delete', deletePacking);
 
 module.exports = router;
