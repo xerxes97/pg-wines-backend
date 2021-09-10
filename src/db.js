@@ -53,8 +53,7 @@ Product.belongsTo(Category);
 
 Brand.hasMany(Product);
 Product.belongsTo(Brand, {
-  foreignKey: "brandId",
-  as: "brand",
+  foreignKey: "brandId"
 });
 
 Packing.hasMany(Product);

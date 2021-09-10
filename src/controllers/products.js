@@ -1,24 +1,26 @@
 const { Op } = require('sequelize');
-const { Product,Category } = require('../db');
+const { Product,Category,Brand } = require('../db');
 
-const itemsPerPage= 10;
+
 const exclude= ['createdAt', 'updatedAt','categoryId']
 
 async function getProducts(req, res) {
-    let { name, categoryId,page,orderBy,orderType,initialPrice,finalPrice} = req.query;
+    let { name, categoryId,page,orderBy,orderType,initPrice,finalPrice, brand,itemsPerPage} = req.query;
     const validate = ['null', undefined, 'undefined', '']
     if(validate.includes(name))name="";
+    if(validate.includes(itemsPerPage))itemsPerPage=10;
+    if(validate.includes(brand))brand="";
     if(validate.includes(categoryId))categoryId='';
     if(validate.includes(orderBy))orderBy='name';
     if(validate.includes(orderType))orderType='asc'
     if(validate.includes(page))page=1;
-    if(validate.includes(initialPrice)) initialPrice=0;
+    if(validate.includes(initPrice))initPrice=0;
     if(validate.includes(finalPrice))finalPrice=10000000;
     try {
         const count = await Product.findAll({
             where:{
                 name:{[Op.like]:`%${name}%`},
-                cost: {[Op.between]:[initialPrice,finalPrice]}
+                cost: {[Op.between]:[initPrice,finalPrice]}
             },
             include:[
                 {
@@ -27,12 +29,20 @@ async function getProducts(req, res) {
                         id: categoryId
                     } : null
                 }
+            ],
+            include:[
+                {
+                    model: Brand,
+                    where: brand ? {
+                        name: brand
+                    } : null
+                }
             ]
         })
         const products = await Product.findAll({
             where: {
                 name: { [Op.iLike]: `%${name}%` },
-                cost: {[Op.between]:[initialPrice,finalPrice]}
+                cost: {[Op.between]:[initPrice,finalPrice]}
             },
             attributes: {
                 exclude
@@ -48,10 +58,18 @@ async function getProducts(req, res) {
                     attributes: ['name', 'id']
                 }
             ],
+            include:[
+                {
+                    model: Brand,
+                    where: brand ? {
+                        name: brand
+                    } : null
+                }
+            ],
             order:[[orderBy,orderType]]
         })
         products.map(prod=>{
-            let imgUrl=`https://digitalyactual.com/delsur/${prod.image[0]}`
+            let imgUrl=`https://digitalyactual.com/delsur/${prod.image[0]}.jpg`
             prod.image[0]=imgUrl;
         })
         return res.status(200).send({totalPage:Math.ceil(count.length/itemsPerPage),products})
@@ -59,6 +77,7 @@ async function getProducts(req, res) {
         console.log('ERROR in getProducts', err);
     }
 }
+
 
 
 async function getProductById(req, res) {
