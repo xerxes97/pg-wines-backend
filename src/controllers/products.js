@@ -2,7 +2,7 @@ const { Op } = require('sequelize');
 const { Product,Category,Brand } = require('../db');
 
 
-const exclude= ['createdAt', 'updatedAt','categoryId']
+const exclude= ['createdAt', 'updatedAt','categoryId','brandId']
 
 async function getProducts(req, res) {
     let { name, categoryId,page,orderBy,orderType,initPrice,finalPrice, brand,itemsPerPage} = req.query;
@@ -28,9 +28,7 @@ async function getProducts(req, res) {
                     where: categoryId ? {
                         id: categoryId
                     } : null
-                }
-            ],
-            include:[
+                },
                 {
                     model: Brand,
                     where: brand ? {
@@ -56,9 +54,7 @@ async function getProducts(req, res) {
                         id: categoryId
                     } : null,
                     attributes: ['name', 'id']
-                }
-            ],
-            include:[
+                },
                 {
                     model: Brand,
                     where: brand ? {
@@ -69,7 +65,7 @@ async function getProducts(req, res) {
             order:[[orderBy,orderType]]
         })
         products.map(prod=>{
-            let imgUrl=`https://digitalyactual.com/delsur/${prod.image[0]}.jpg`
+            let imgUrl=`https://digitalyactual.com/delsur/${prod.image[0]}`
             prod.image[0]=imgUrl;
         })
         return res.status(200).send({totalPage:Math.ceil(count.length/itemsPerPage),products})

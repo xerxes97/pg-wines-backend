@@ -1,4 +1,5 @@
 const path = require('path');
+const multer = require('multer');
 require('dotenv').config();
 const routes = require('./routes');
 
@@ -19,6 +20,13 @@ const config = {
   }
 };
 
+const imageStorage = multer.diskStorage({
+  destination: path.join(__dirname, '../client/images'),
+  filename: (req, file, cb) => {
+    cb(null, file.originalname);
+  }
+});
+
 const server = express();
 server.name = 'delsur-api';
 
@@ -30,9 +38,26 @@ server.use(cors(
 server.use(express.json());
 server.use(morgan('dev'));
 
-if (process.env.NODE_ENV === "production") {
-  server.use(express.static(path.join(__dirname, "../client")));
-}
+server.use(multer({
+  storage: imageStorage,
+  dest: path.join(__dirname, '../client/images'),
+  limits: { fileSize: 2097152 },
+  fileFilter: (req, file, cb) => {
+    const filetypes = /jpeg|jpg|png|gif/;
+    const mimetype = filetypes.test(file.mimetype);
+    const extname = filetypes.test(file.originalname);
+    if (mimetype && extname) {
+      return cb(null, true);
+    }
+    cb("Error: Image must be an image file type (Supported formats are JPEG, JPG, PNG, GIF).");
+  }
+}).single('image'));
+
+server.use(express.static(path.join(__dirname, '../client')));
+
+// if (process.env.NODE_ENV === "production") {
+//   server.use(express.static(path.join(__dirname, "../client")));
+// }
 
 server.use('/', routes);
 
