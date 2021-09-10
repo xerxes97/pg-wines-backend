@@ -25,8 +25,42 @@ async function postCategory(req, res) {
     }
 }
 
+async function updateCategory(req, res) {
+    const { id, name } = req.body;
+    if (!id) return res.status(422).send({ error: 'The category id is required' });
+    if (!name) return res.status(422).send({ error: 'You should specified the new name.' });
+
+    try {
+        const category = await Category.findByPk(id);
+        if (!category) return res.status(422).send({ error: 'The category id is wrong' });
+        category.name = name;
+        await category.save();
+        return res.send('The category has been updated suscesfully');
+    } catch (err) {
+        console.log('ERROR in updateCategory', err);
+    }
+}
+
+async function deleteCategory(req, res) {
+    const { id } = req.body;
+    if (!id) return res.send({ error: 'The category id is required' })
+    const category = await Category.findByPk(id)
+    if (!category) return res.send({ error: 'There is not any category with this id' })
+    try {
+        await Category.destroy({
+            where: {
+                id
+            }
+        })
+        return res.send('The category was removed successfully')
+    } catch (err) {
+        console.log('ERROR in deleteCategory', err);
+    }
+}
 
 module.exports = {
     getCategories,
-    postCategory
+    postCategory,
+    updateCategory,
+    deleteCategory
 }
