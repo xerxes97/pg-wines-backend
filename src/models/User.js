@@ -1,14 +1,19 @@
-const { DataTypes } = require('sequelize');
+const { DataTypes, UUID } = require('sequelize');
 
 module.exports = (sequelize) => {
   //See constraints here => https://sequelize.org/master/manual/validations-and-constraints.html
-  sequelize.define('user', {    
-    username: {
+  sequelize.define('user', {   
+    id:{
+      type: DataTypes.UUID,
+      allowNull:false,
+      primaryKey:true
+    }, 
+    displayName: {
       type: DataTypes.STRING,
       allowNull: false,
       unique: true
     },
-    hashedPassword: {
+    password: {
       type: DataTypes.STRING(64),
       is: /^[0-9a-f]{64}$/i,
       allowNull: false
@@ -23,33 +28,15 @@ module.exports = (sequelize) => {
       unique: true,
       isEmail: true
     },
-    photo: {
+    photoURL: {
       type: DataTypes.STRING,
       allowNull: true,
-      defaultValue: ""
+      defaultValue: "https://i.imgur.com/vfrW9Xx.png"
     },
-    birthDate: {
-      type: DataTypes.DATE,
-      allowNull: false
-    },
-    lastloginDate: {
-      type: DataTypes.DATE,
-      allowNull: false
-    },
-    registrationMode: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
-      isIn: [['direct', 'facebook', 'google']]
-    },
-    verification: {
+    admin: {
       type: DataTypes.BOOLEAN,
+      defaultValue: false,
       allowNull: false,
-      defaultValue: false
-    },
-    status: {
-      type: DataTypes.BOOLEAN,
-      allowNull: false,
-      defaultValue: true
     }
   });
 };
