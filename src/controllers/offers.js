@@ -3,6 +3,10 @@ const { Offer } = require('../db');
 async function getOffers(req, res) {
     try {
         const offers = await Offer.findAll()
+        offers.map(elem => {
+            let imgUrl=`https://pg-delsur.herokuapp.com/images/${elem.image}`
+            elem.image=imgUrl;
+        })
         return res.send(offers);
     } catch (err) {
         console.log('ERROR in getOffers', err);
@@ -20,6 +24,10 @@ async function postOffer(req, res) {
                 slug
             });
             createdOffer.setProduct(productId);
+            createdOffer.map(elem => {
+                let imgUrl=`https://pg-delsur.herokuapp.com/images/${elem.image}`
+                elem.image=imgUrl;
+            })
             res.send(createdOffer);
         } else {
             res.status(422).send({ error: 'Fields status, image and productId are required' })
