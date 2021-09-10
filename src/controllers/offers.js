@@ -24,10 +24,8 @@ async function postOffer(req, res) {
                 slug
             });
             createdOffer.setProduct(productId);
-            createdOffer.map(elem => {
-                let imgUrl=`https://pg-delsur.herokuapp.com/images/${elem.image}`
-                elem.image=imgUrl;
-            })
+            let imgUrl=`https://pg-delsur.herokuapp.com/images/${createdOffer.image}`;
+            createdOffer.image=imgUrl
             res.send(createdOffer);
         } else {
             res.status(422).send({ error: 'Fields status, image and productId are required' })
