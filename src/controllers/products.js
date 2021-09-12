@@ -1,5 +1,14 @@
+require('dotenv').config();
 const { Op } = require('sequelize');
 const { Product,Category,Brand } = require('../db');
+const cloudinary = require('cloudinary');
+cloudinary.config({
+    cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
+    api_key: process.env.CLOUDINARY_API_KEY,
+    api_secret: process.env.CLOUDINARY_API_SECRET
+});
+const fs = require('fs-extra');
+
 
 
 const exclude= ['createdAt', 'updatedAt','categoryId','brandId']
@@ -106,10 +115,12 @@ async function postProduct(req, res) {
     //non required fields:  stock=0, description="", discount=0, image=[], sales=0, 
     const { 
         name, cost, capacity, categoryId, brandId, packingId,
-        stock, description, discount, image, sales 
+        stock, description, discount, sales 
     } = req.body;
+    const image = req.file? req.file.filename : undefined;
     try {
         if (name && cost && capacity && categoryId && brandId && packingId) {
+            const result = req.file ? await cloudinary.v2.uploader.upload(req.file.path) : undefined;
             var createdProduct = await Product.create({
                 name,
                 stock,
@@ -117,7 +128,7 @@ async function postProduct(req, res) {
                 description,
                 discount,
                 capacity,
-                image,
+                image: result ? result.secure_url.split() : [],
                 sales
             });
             await createdProduct.setCategory(categoryId);

@@ -1,12 +1,17 @@
+require('dotenv').config();
 const { Offer } = require('../db');
+const cloudinary = require('cloudinary');
+cloudinary.config({
+    cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
+    api_key: process.env.CLOUDINARY_API_KEY,
+    api_secret: process.env.CLOUDINARY_API_SECRET
+});
+const fs = require('fs-extra');
+
 
 async function getOffers(req, res) {
     try {
         const offers = await Offer.findAll()
-        offers.map(elem => {
-            let imgUrl=`https://pg-delsur.herokuapp.com/images/${elem.image}`
-            elem.image=imgUrl;
-        })
         return res.send(offers);
     } catch (err) {
         console.log('ERROR in getOffers', err);
@@ -18,14 +23,14 @@ async function postOffer(req, res) {
     const image = req.file? req.file.filename : undefined;
     try {
         if (status && image && productId) {
+            const result = await cloudinary.v2.uploader.upload(req.file.path);
             const createdOffer = await Offer.create({
                 status,
-                image,
+                image: result.secure_url,
                 slug
             });
             createdOffer.setProduct(productId);
-            let imgUrl=`https://pg-delsur.herokuapp.com/images/${createdOffer.image}`;
-            createdOffer.image=imgUrl
+            await fs.unlink(req.file.path);
             res.send(createdOffer);
         } else {
             res.status(422).send({ error: 'Fields status, image and productId are required' })
