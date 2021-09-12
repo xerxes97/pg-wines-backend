@@ -2179,6 +2179,7 @@
     "capacity": 750,
     "image": ["01_1605642790.jpg"],
     "sales": 0,
+    "categoryId": 1,
     "brandId": 157,
     "packingId": 1
   },
@@ -2191,6 +2192,7 @@
     "capacity": 750,
     "image": ["01_1605543840.jpg"],
     "sales": 0,
+    "categoryId": 1,
     "brandId": 217,
     "packingId": 1
   },
@@ -2203,6 +2205,7 @@
     "capacity": 750,
     "image": ["01_1605540337.jpg"],
     "sales": 0,
+    "categoryId": 1,
     "brandId": 10,
     "packingId": 1
   },
@@ -2215,6 +2218,7 @@
     "capacity": 750,
     "image": ["01_1605538680.jpg"],
     "sales": 0,
+    "categoryId": 1,
     "brandId": 217,
     "packingId": 1
   },
@@ -2227,6 +2231,7 @@
     "capacity": 750,
     "image": ["01_1623095156.jpg"],
     "sales": 0,
+    "categoryId": 1,
     "brandId": 240,
     "packingId": 1
   },
@@ -2239,6 +2244,7 @@
     "capacity": 750,
     "image": ["01_1623095336.jpg"],
     "sales": 0,
+    "categoryId": 1,
     "brandId": 217,
     "packingId": 1
   },
@@ -2251,6 +2257,7 @@
     "capacity": 187,
     "image": ["01_1605532295.jpg"],
     "sales": 0,
+    "categoryId": 1,
     "brandId": 167,
     "packingId": 1
   },
@@ -2263,6 +2270,7 @@
     "capacity": 750,
     "image": ["01_1605531958.jpg"],
     "sales": 0,
+    "categoryId": 1,
     "brandId": 167,
     "packingId": 1
   },
@@ -2275,6 +2283,7 @@
     "capacity": 750,
     "image": ["01_1624981409.jpg"],
     "sales": 0,
+    "categoryId": 1,
     "brandId": 263,
     "packingId": 1
   },
@@ -2287,6 +2296,7 @@
     "capacity": 750,
     "image": ["01_1603291722.jpg"],
     "sales": 0,
+    "categoryId": 1,
     "brandId": 248,
     "packingId": 1
   },
@@ -2299,6 +2309,7 @@
     "capacity": 750,
     "image": ["01_1607097693.jpg"],
     "sales": 0,
+    "categoryId": 1,
     "brandId": 152,
     "packingId": 1
   },
@@ -2311,6 +2322,7 @@
     "capacity": 750,
     "image": ["01_1600457395.jpg"],
     "sales": 0,
+    "categoryId": 1,
     "brandId": 250,
     "packingId": 1
   },
@@ -2323,6 +2335,7 @@
     "capacity": 750,
     "image": ["01_1600457502.jpg"],
     "sales": 0,
+    "categoryId": 1,
     "brandId": 250,
     "packingId": 1
   },
@@ -2335,6 +2348,7 @@
     "capacity": 750,
     "image": ["01_1600901254.jpg"],
     "sales": 0,
+    "categoryId": 1,
     "brandId": 248,
     "packingId": 1
   },
@@ -2347,6 +2361,7 @@
     "capacity": 750,
     "image": ["01_1600901217.jpg"],
     "sales": 0,
+    "categoryId": 1,
     "brandId": 248,
     "packingId": 1
   },
@@ -2359,6 +2374,7 @@
     "capacity": 750,
     "image": ["01_1600901164.jpg"],
     "sales": 0,
+    "categoryId": 1,
     "brandId": 248,
     "packingId": 1
   },
@@ -2371,6 +2387,7 @@
     "capacity": 750,
     "image": ["01_1600901129.jpg"],
     "sales": 0,
+    "categoryId": 1,
     "brandId": 248,
     "packingId": 1
   },
@@ -2383,6 +2400,7 @@
     "capacity": 750,
     "image": ["01_1600901035.jpg"],
     "sales": 0,
+    "categoryId": 1,
     "brandId": 248,
     "packingId": 1
   },
@@ -2395,6 +2413,7 @@
     "capacity": 750,
     "image": ["01_1600875515.jpg"],
     "sales": 0,
+    "categoryId": 1,
     "brandId": 220,
     "packingId": 1
   },
@@ -2407,6 +2426,7 @@
     "capacity": 750,
     "image": ["01_1600873574.jpg"],
     "sales": 0,
+    "categoryId": 1,
     "brandId": 213,
     "packingId": 1
   },
@@ -2419,6 +2439,7 @@
     "capacity": 750,
     "image": ["01_1600957460.jpg"],
     "sales": 0,
+    "categoryId": 1,
     "brandId": 213,
     "packingId": 1
   },
@@ -2431,6 +2452,7 @@
     "capacity": 750,
     "image": ["01_1600872708.jpg"],
     "sales": 0,
+    "categoryId": 1,
     "brandId": 213,
     "packingId": 1
   },
@@ -2443,6 +2465,7 @@
     "capacity": 750,
     "image": ["01_1600872637.jpg"],
     "sales": 0,
+    "categoryId": 1,
     "brandId": 212,
     "packingId": 1
   },
@@ -2455,6 +2478,7 @@
     "capacity": 750,
     "image": ["01_1600872552.jpg"],
     "sales": 0,
+    "categoryId": 1,
     "brandId": 212,
     "packingId": 1
   },
@@ -2467,6 +2491,7 @@
     "capacity": 750,
     "image": ["01_1600872481.jpg"],
     "sales": 0,
+    "categoryId": 1,
     "brandId": 212,
     "packingId": 1
   },
@@ -2479,6 +2504,7 @@
     "capacity": 750,
     "image": ["01_1600871843.jpg"],
     "sales": 0,
+    "categoryId": 1,
     "brandId": 204,
     "packingId": 1
   },
@@ -2491,6 +2517,7 @@
     "capacity": 750,
     "image": ["01_1600871610.jpg"],
     "sales": 0,
+    "categoryId": 1,
     "brandId": 204,
     "packingId": 1
   },
@@ -2503,6 +2530,7 @@
     "capacity": 750,
     "image": ["01_1629728225.jpg"],
     "sales": 0,
+    "categoryId": 1,
     "brandId": 146,
     "packingId": 1
   },
@@ -2515,6 +2543,7 @@
     "capacity": 473,
     "image": ["01_1629747400.jpg"],
     "sales": 0,
+    "categoryId": 1,
     "brandId": 202,
     "packingId": 2
   },
@@ -2527,6 +2556,7 @@
     "capacity": 710,
     "image": ["01_1628611357.jpg"],
     "sales": 0,
+    "categoryId": 1,
     "brandId": 49,
     "packingId": 1
   },
@@ -2539,6 +2569,7 @@
     "capacity": 473,
     "image": ["01_1628174773.jpg"],
     "sales": 0,
+    "categoryId": 4,
     "brandId": 202,
     "packingId": 2
   },
@@ -2551,6 +2582,7 @@
     "capacity": 473,
     "image": ["01_1628174463.jpg"],
     "sales": 0,
+    "categoryId": 4,
     "brandId": 202,
     "packingId": 2
   },
@@ -2563,6 +2595,7 @@
     "capacity": 473,
     "image": ["01_1628174220.jpg"],
     "sales": 0,
+    "categoryId": 4,
     "brandId": 202,
     "packingId": 2
   },
@@ -2575,6 +2608,7 @@
     "capacity": 473,
     "image": ["01_1628173862.jpg"],
     "sales": 0,
+    "categoryId": 4,
     "brandId": 202,
     "packingId": 2
   },
@@ -2587,6 +2621,7 @@
     "capacity": 330,
     "image": ["01_1628169169.jpg"],
     "sales": 0,
+    "categoryId": 4,
     "brandId": 235,
     "packingId": 1
   },
@@ -2599,6 +2634,7 @@
     "capacity": 473,
     "image": ["01_1628107588.jpg"],
     "sales": 0,
+    "categoryId": 4,
     "brandId": 202,
     "packingId": 2
   },
@@ -2611,6 +2647,7 @@
     "capacity": 473,
     "image": ["01_1628107176.jpg"],
     "sales": 0,
+    "categoryId": 4,
     "brandId": 202,
     "packingId": 2
   },
@@ -2623,6 +2660,7 @@
     "capacity": 473,
     "image": ["01_1626715053.jpg"],
     "sales": 0,
+    "categoryId": 4,
     "brandId": 38,
     "packingId": 2
   },
@@ -2635,6 +2673,7 @@
     "capacity": 473,
     "image": ["01_1626714936.jpg"],
     "sales": 0,
+    "categoryId": 4,
     "brandId": 38,
     "packingId": 2
   },
@@ -2647,6 +2686,7 @@
     "capacity": 473,
     "image": ["01_1626714741.jpg"],
     "sales": 0,
+    "categoryId": 4,
     "brandId": 38,
     "packingId": 2
   },
@@ -2659,6 +2699,7 @@
     "capacity": 473,
     "image": ["01_1626714414.jpg"],
     "sales": 0,
+    "categoryId": 4,
     "brandId": 38,
     "packingId": 2
   },
@@ -2671,6 +2712,7 @@
     "capacity": 473,
     "image": ["01_1626714189.jpg"],
     "sales": 0,
+    "categoryId": 4,
     "brandId": 38,
     "packingId": 2
   },
@@ -2683,6 +2725,7 @@
     "capacity": 473,
     "image": ["01_1627325708.jpg"],
     "sales": 0,
+    "categoryId": 4,
     "brandId": 38,
     "packingId": 2
   },
@@ -2695,6 +2738,7 @@
     "capacity": 473,
     "image": ["01_1624451368.jpg"],
     "sales": 0,
+    "categoryId": 4,
     "brandId": 235,
     "packingId": 2
   },
@@ -2707,6 +2751,7 @@
     "capacity": 473,
     "image": ["01_1623171324.jpg"],
     "sales": 0,
+    "categoryId": 4,
     "brandId": 23,
     "packingId": 2
   },
@@ -2719,6 +2764,7 @@
     "capacity": 710,
     "image": ["01_1620243784.jpg"],
     "sales": 0,
+    "categoryId": 4,
     "brandId": 79,
     "packingId": 1
   },
@@ -2731,6 +2777,7 @@
     "capacity": 473,
     "image": ["01_1619534964.jpg"],
     "sales": 0,
+    "categoryId": 4,
     "brandId": 23,
     "packingId": 2
   },
@@ -2743,6 +2790,7 @@
     "capacity": 473,
     "image": ["01_1615818071.jpg"],
     "sales": 0,
+    "categoryId": 4,
     "brandId": 189,
     "packingId": 2
   },
@@ -2755,6 +2803,7 @@
     "capacity": 710,
     "image": ["01_1614258570.jpg"],
     "sales": 0,
+    "categoryId": 4,
     "brandId": 138,
     "packingId": 2
   },
@@ -2767,6 +2816,7 @@
     "capacity": 473,
     "image": ["01_1613662600.jpg"],
     "sales": 0,
+    "categoryId": 4,
     "brandId": 21,
     "packingId": 2
   },
@@ -2779,6 +2829,7 @@
     "capacity": 473,
     "image": ["01_1613653204.jpg"],
     "sales": 0,
+    "categoryId": 4,
     "brandId": 189,
     "packingId": 2
   },
@@ -2791,6 +2842,7 @@
     "capacity": 473,
     "image": ["01_1611934283.jpg"],
     "sales": 0,
+    "categoryId": 4,
     "brandId": 201,
     "packingId": 2
   },
@@ -2803,6 +2855,7 @@
     "capacity": 473,
     "image": ["01_1611934012.jpg"],
     "sales": 0,
+    "categoryId": 4,
     "brandId": 23,
     "packingId": 2
   },
@@ -2815,6 +2868,7 @@
     "capacity": 473,
     "image": ["01_1600448934.jpg"],
     "sales": 0,
+    "categoryId": 4,
     "brandId": 256,
     "packingId": 2
   },
