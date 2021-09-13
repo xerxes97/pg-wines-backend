@@ -134,6 +134,7 @@ async function postProduct(req, res) {
             await createdProduct.setCategory(categoryId);
             await createdProduct.setBrand(brandId);
             await createdProduct.setPacking(packingId);
+            await fs.unlink(req.file.path);
             res.send(createdProduct);
         } else {
             res.status(422).send({ error: 'These data are required: name, cost, capacity, categoryId, brandId, packingId' })
