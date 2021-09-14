@@ -18,12 +18,8 @@ module.exports = (sequelize) => {
       is: /^[0-9a-f]{64}$/i,
       allowNull: false
     },
-    name: {
-      type: DataTypes.STRING,
-      allowNull: false
-    },
     email: {
-      type: DataTypes.INTEGER,
+      type: DataTypes.STRING,
       allowNull: false,
       unique: true,
       isEmail: true
@@ -36,7 +32,6 @@ module.exports = (sequelize) => {
     admin: {
       type: DataTypes.BOOLEAN,
       defaultValue: false,
-      allowNull: false,
     }
   });
 };
