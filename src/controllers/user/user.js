@@ -4,21 +4,21 @@ const { v4: uuidv4 } = require('uuid');
 
 async function newUser(req, res, next) {
     console.log('esta entrando en la funcion')
-    if (!req.body.displayName || !req.body.email || !req.body.password) {
+    if (!req.body.name || !req.body.email || !req.body.password) {
         return res.status(400).json({ message: 'Bad request' })
     }
     const photoURL="https://i.imgur.com/vfrW9Xx.png";
     if(req.body.photoURL)photoURL=req.body.photoURL
-    const { email, displayName, password} = req.body
+    const { email, name, password} = req.body
     console.log('esta haciendo destructuring')
     const  id=uuidv4();
-    let user={id,email,displayName,password,admin:false,photoURL};
+    let user={id,email,name,password,admin:false,photoURL};
     try {
         const exist = await User.findOne({where:{email:user.email}})
         console.log('valida el email')
         if (exist) { return res.status(500).send({ message: 'El email ya existe.' }) }
-        const exist2 = await User.findOne({ where: { displayName: user.displayName } })
-        console.log('valida el displayname')
+        const exist2 = await User.findOne({ where: { name: user.name } })
+        console.log('valida el name')
         if (exist2 !== null) { return res.status(500).json({ message: 'El nombre de usuario ya existe.' }) }
         const id = uuidv4()
         console.log('valida si existe')
@@ -34,7 +34,7 @@ async function updateUser(req, res, next) {
     const { idUser} = req.body
     try {
         const user = await User.findByPk(idUser)
-        req.body.displayName ? user.displayName = req.body.displayName : '';
+        req.body.name ? user.name = req.body.name : '';
         req.body.password ? user.password=req.body.password:'';
         req.body.photoURL?user.photoURL=req.body.photoURL:'';
         user.save()
@@ -46,8 +46,8 @@ async function updateUser(req, res, next) {
 
 
 async function getAllUsers(req, res, next) {
-    let {displayName, admin} = req.query
-    if(displayName === 'undefined') displayName = ''
+    let {name, admin} = req.query
+    if(name === 'undefined') name = ''
     if(admin === 'undefined') admin = undefined
     try {
         const user = await User.findAll();
@@ -79,8 +79,8 @@ async function deleteUser(req, res, next) {
 
 
 async function loginUser(req, res, next) {
-    const {email, displayName, password} = req.body
-    if(displayName) {
+    const {email, name, password} = req.body
+    if(name) {
         try {
             const isUser = await User.findOne({
                 where: {

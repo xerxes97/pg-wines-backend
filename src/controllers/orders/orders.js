@@ -1,4 +1,4 @@
-const { User, Product, Order, Order_Line } = require('../../db.js');
+const { User, Product, Order, OrderProduct } = require('../../db.js');
 const { Op } = require('sequelize')
 
 const exclude = ['createdAt', 'updatedAt']
@@ -74,7 +74,7 @@ const getOrderById = async (req, res, next) => {
                     exclude
                 },
                 through: {
-                    model: Order_Line,
+                    model: OrderProduct,
                     attributes: []
                 }
             }
