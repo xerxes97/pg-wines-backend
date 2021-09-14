@@ -1,23 +1,27 @@
 const { User} = require('../../db');
 const { v4: uuidv4 } = require('uuid');
-const { Op } = require("sequelize");
 
-const exclude = ['createdAt', 'updatedAt']
 
 async function newUser(req, res, next) {
+    console.log('esta entrando en la funcion')
     if (!req.body.displayName || !req.body.email || !req.body.password) {
         return res.status(400).json({ message: 'Bad request' })
     }
-    const photoURL=null;
+    const photoURL="https://i.imgur.com/vfrW9Xx.png";
     if(req.body.photoURL)photoURL=req.body.photoURL
     const { email, displayName, password} = req.body
+    console.log('esta haciendo destructuring')
+    const  id=uuidv4();
+    let user={id,email,displayName,password,admin:false,photoURL};
     try {
-        const exist = await User.findOne({ where: { email: email } })
-        if (exist !== null) { return res.status(500).send({ message: 'El email ya existe.' }) }
-        const exist2 = await User.findOne({ where: { displayName: displayName } })
+        const exist = await User.findOne({where:{email:user.email}})
+        console.log('valida el email')
+        if (exist) { return res.status(500).send({ message: 'El email ya existe.' }) }
+        const exist2 = await User.findOne({ where: { displayName: user.displayName } })
+        console.log('valida el displayname')
         if (exist2 !== null) { return res.status(500).json({ message: 'El nombre de usuario ya existe.' }) }
         const id = uuidv4()
-        const user = { id, displayName, password, email, photoURL }
+        console.log('valida si existe')
         
         await User.create(user)
         return res.send(user)
@@ -46,19 +50,7 @@ async function getAllUsers(req, res, next) {
     if(displayName === 'undefined') displayName = ''
     if(admin === 'undefined') admin = undefined
     try {
-        const user = await User.findAll({
-            where: admin !== undefined ?
-            {
-                displayName: { [Op.iLike]: `%${displayName}%` },
-                admin
-            } : {
-                displayName: { [Op.iLike]: `%${displayName}%` }
-            },
-            attributes: {
-                exclude: [...exclude,'password']
-            },
-            order: ['displayName']
-        });
+        const user = await User.findAll();
         return res.send(user)
     } catch (error) {
         next({ message: 'Bad Request' })
@@ -71,6 +63,8 @@ async function deleteUser(req, res, next) {
     }
     const { idUser } = req.params;
     try {
+        const local=await User.findByPk(idUser);
+        if(!local) return res.send('El usuario no existe.')
         await User.destroy({
             where: {
                 id: idUser
