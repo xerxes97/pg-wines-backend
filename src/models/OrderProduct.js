@@ -1,12 +1,12 @@
 const { DataTypes } = require('sequelize');
 
 module.exports = (sequelize) => {
-  sequelize.define('order_Line', {    
+  sequelize.define('orderProduct', {    
     quantity: {        
       type: DataTypes.INTEGER,
       allowNull: false      
     },
-    price: {
+    cost: {
       type: DataTypes.FLOAT,
       allowNull: false      
     },

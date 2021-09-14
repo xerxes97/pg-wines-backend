@@ -8,7 +8,7 @@ module.exports = (sequelize) => {
       allowNull:false,
       primaryKey:true
     }, 
-    displayName: {
+    name: {
       type: DataTypes.STRING,
       allowNull: false,
       unique: true
@@ -16,7 +16,7 @@ module.exports = (sequelize) => {
     password: {
       type: DataTypes.STRING(64),
       is: /^[0-9a-f]{64}$/i,
-      allowNull: false
+      allowNull: true
     },
     email: {
       type: DataTypes.STRING,
@@ -32,6 +32,18 @@ module.exports = (sequelize) => {
     admin: {
       type: DataTypes.BOOLEAN,
       defaultValue: false,
-    }
+    },
+    birthDate: {
+      type: DataTypes.DATEONLY,
+      allowNull: false,
+    },
+    active: {
+      type: DataTypes.BOOLEAN,
+      defaultValue: true,
+    },
+    phone: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
   });
 };
