@@ -5,6 +5,7 @@ const { Op } = require("sequelize");
 const exclude = ['createdAt', 'updatedAt']
 
 async function newUser(req, res, next) {
+    console.log('ko');
     if (!req.body.displayName || !req.body.email || !req.body.password) {
         return res.status(400).json({ message: 'Bad request' })        
     }
