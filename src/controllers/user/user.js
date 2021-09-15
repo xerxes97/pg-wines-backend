@@ -6,7 +6,7 @@ const exclude = ['createdAt', 'updatedAt']
 
 async function newUser(req, res, next) {
     if (!req.body.displayName || !req.body.email || !req.body.password) {
-        return res.status(400).json({ message: 'Bad request' })
+        return res.status(400).json({ message: 'Bad request' })        
     }
     const photoURL=null;
     if(req.body.photoURL)photoURL=req.body.photoURL
