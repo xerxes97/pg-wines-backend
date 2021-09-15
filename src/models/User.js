@@ -3,11 +3,11 @@ const { DataTypes, UUID } = require('sequelize');
 module.exports = (sequelize) => {
   //See constraints here => https://sequelize.org/master/manual/validations-and-constraints.html
   sequelize.define('user', {   
-    id:{
-      type: DataTypes.UUID,
-      allowNull:false,
-      primaryKey:true
-    }, 
+    // id:{
+    //   type: DataTypes.UUID,
+    //   allowNull:false,
+    //   primaryKey:true
+    // }, 
     displayName: {
       type: DataTypes.STRING,
       allowNull: false,
@@ -23,7 +23,7 @@ module.exports = (sequelize) => {
       allowNull: false
     },
     email: {
-      type: DataTypes.INTEGER,
+      type: DataTypes.STRING,
       allowNull: false,
       unique: true,
       isEmail: true
