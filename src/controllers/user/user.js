@@ -3,9 +3,14 @@ const { v4: uuidv4 } = require('uuid');
 
 
 async function newUser(req, res, next) {
+
+    if (!req.body.displayName || !req.body.email || !req.body.password) {
+        return res.status(400).json({ message: 'Bad request' })        
+
     console.log('esta entrando en la funcion')
     if (!req.body.name || !req.body.email || !req.body.password) {
         return res.status(400).json({ message: 'Bad request' })
+
     }
     const photoURL="https://i.imgur.com/vfrW9Xx.png";
     if(req.body.photoURL)photoURL=req.body.photoURL
