@@ -2,7 +2,8 @@ const { DataTypes, UUID } = require('sequelize');
 
 module.exports = (sequelize) => {
   //See constraints here => https://sequelize.org/master/manual/validations-and-constraints.html
-  sequelize.define('user', {   
+  sequelize.define('user', {      
+
     id:{
       type: DataTypes.UUID,
       allowNull:false,
