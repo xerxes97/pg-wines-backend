@@ -1,40 +1,30 @@
-const path = require('path');
-const multer = require('multer');
+import path from 'path';
+import multer from 'multer';
 require('dotenv').config();
-const routes = require('./routes');
+// import routes from './routes';
 
-const express = require('express');
-const morgan = require('morgan');
-const cors = require('cors');
+import express from 'express';
+import morgan from 'morgan';
+import cors, { CorsOptions } from 'cors';
 // Settings for let access the localhost:3000 front-end app (using cors middleware)
-const config = {
-  application: {
-      cors: {
-          server: [
-              {
-                  origin: "*", //servidor que deseas que consuma o (*) en caso que sea acceso libre
-                  credentials: true
-              }
-          ]
-      }
-  }
+const config: CorsOptions = {
+  origin: "*",
+  credentials: true
 };
 
 const imageStorage = multer.diskStorage({
   destination: path.join(__dirname, '../client/images'),
-  filename: (req, file, cb) => {
+  filename: (_: any, file: any, cb: any) => {
     cb(null, file.originalname);
   }
 });
 
 const server = express();
-server.name = 'delsur-api';
+// server.name = 'delsur-api';
 
 server.set('json spaces', 2);
 // Middlewares
-server.use(cors(
-  config.application.cors.server
-));
+server.use(cors(config));
 server.use(express.json());
 server.use(morgan('dev'));
 
@@ -42,7 +32,7 @@ server.use(multer({
   storage: imageStorage,
   dest: path.join(__dirname, '../client/images'),
   limits: { fileSize: 2097152 },
-  fileFilter: (req, file, cb) => {
+  fileFilter: (_: any, file: any, cb: any) => {
     const filetypes = /jpeg|jpg|png|gif/;
     const mimetype = filetypes.test(file.mimetype);
     const extname = filetypes.test(file.originalname);
@@ -59,6 +49,6 @@ server.use(express.static(path.join(__dirname, '../client')));
 //   server.use(express.static(path.join(__dirname, "../client")));
 // }
 
-server.use('/', routes);
+// server.use('/', routes);
 
-module.exports = server;
+export default server;
