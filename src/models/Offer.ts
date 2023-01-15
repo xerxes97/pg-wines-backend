@@ -3,7 +3,7 @@ import {
   } from 'sequelize';
 
   module.exports = (sequelize: any, DataTypes: any) => {
-    class Brand extends Model {
+    class Offer extends Model {
       /**
        * Helper method for defining associations.
        * This method is not a part of Sequelize lifecycle.
@@ -18,7 +18,7 @@ import {
       // //   })
       // }
     };
-    Brand.init({
+    Offer.init({
       id: {
         type: DataTypes.UUID,
         defaultValue: UUIDV4,
@@ -29,9 +29,21 @@ import {
         type: DataTypes.STRING,
         allowNull: false
       },
+      status: {
+        type: DataTypes.BOOLEAN,
+        allowNull: false
+      },
+      image: {
+        type: DataTypes.STRING,
+        allowNull: false
+      },
+      slug: {
+        type: DataTypes.STRING,
+        defaultValue: ""
+      }
     }, {
       sequelize,
-      modelName: 'Brand',
+      modelName: 'Offer',
     });
-    return Brand;
+    return Offer;
   };

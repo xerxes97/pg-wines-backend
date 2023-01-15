@@ -3,7 +3,7 @@ import {
   } from 'sequelize';
 
   module.exports = (sequelize: any, DataTypes: any) => {
-    class Brand extends Model {
+    class Review extends Model {
       /**
        * Helper method for defining associations.
        * This method is not a part of Sequelize lifecycle.
@@ -18,20 +18,28 @@ import {
       // //   })
       // }
     };
-    Brand.init({
+    Review.init({
       id: {
         type: DataTypes.UUID,
         defaultValue: UUIDV4,
         allowNull: false,
         primaryKey: true
       },
-      name: {
+      review: {
         type: DataTypes.STRING,
+        allowNull: true
+      },
+      points: {
+        type: DataTypes.INTEGER,
+        allowNull: true
+      },
+      status: {
+        type: DataTypes.BOOLEAN,
         allowNull: false
       },
     }, {
       sequelize,
-      modelName: 'Brand',
+      modelName: 'Review',
     });
-    return Brand;
+    return Review;
   };

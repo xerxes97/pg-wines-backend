@@ -3,7 +3,7 @@ import {
   } from 'sequelize';
 
   module.exports = (sequelize: any, DataTypes: any) => {
-    class Brand extends Model {
+    class Packing extends Model {
       /**
        * Helper method for defining associations.
        * This method is not a part of Sequelize lifecycle.
@@ -18,7 +18,7 @@ import {
       // //   })
       // }
     };
-    Brand.init({
+    Packing.init({
       id: {
         type: DataTypes.UUID,
         defaultValue: UUIDV4,
@@ -31,7 +31,7 @@ import {
       },
     }, {
       sequelize,
-      modelName: 'Brand',
+      modelName: 'Packing',
     });
-    return Brand;
+    return Packing;
   };
