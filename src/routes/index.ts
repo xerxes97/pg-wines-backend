@@ -1,7 +1,7 @@
 const path = require('path');
 const {Router} = require('express');
 const products = require('./products');
-const categories = require('./categories');
+import categories from './categories';
 const brands = require('./brands');
 const packing = require('./packing');
 const user= require('./user/user');

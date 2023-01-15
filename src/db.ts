@@ -13,7 +13,6 @@ fs.readdirSync(path.join(__dirname, '/models'))
   .filter((file: string) => (file.indexOf('.') !== 0) && (file !== basename) && (file.slice(-3) === '.ts'))
   .forEach((file: any) => {
     const model = require(path.join(__dirname, '/models', file))(sequelize, Sequelize.DataTypes);;
-    console.log(__dirname, model.name, basename)
     db[model.name] = model;
   });
 // Injectamos la conexion (sequelize) a todos los modelos
@@ -58,5 +57,6 @@ Review.belongsTo(User);
 
 db.sequelize = sequelize;
 db.Sequelize = Sequelize;
+// console.log(db)
 
 export default db;

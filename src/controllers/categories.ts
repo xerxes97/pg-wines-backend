@@ -1,6 +1,8 @@
-const { Category } = require('../db');
+import db from '../db'
 
-async function getCategories(req, res) {
+const {Category} = db;
+
+export const getCategories = async (_: any, res: any) => {
     try {
         const categories = await Category.findAll()
         return res.send(categories);
@@ -9,7 +11,7 @@ async function getCategories(req, res) {
     }
 }
 
-async function postCategory(req, res) {
+export const postCategory = async (req: any, res: any) => {
     const { name } = req.body;
     try {
         if (name) {
@@ -25,7 +27,7 @@ async function postCategory(req, res) {
     }
 }
 
-async function updateCategory(req, res) {
+export const updateCategory = async (req: any, res: any) => {
     const { id, name } = req.body;
     if (!id) return res.status(422).send({ error: 'The category id is required' });
     if (!name) return res.status(422).send({ error: 'You should specified the new name.' });
@@ -41,7 +43,7 @@ async function updateCategory(req, res) {
     }
 }
 
-async function deleteCategory(req, res) {
+export const deleteCategory = async (req: any, res: any) => {
     const { id } = req.body;
     if (!id) return res.send({ error: 'The category id is required' })
     const category = await Category.findByPk(id)
@@ -56,11 +58,4 @@ async function deleteCategory(req, res) {
     } catch (err) {
         console.log('ERROR in deleteCategory', err);
     }
-}
-
-module.exports = {
-    getCategories,
-    postCategory,
-    updateCategory,
-    deleteCategory
 }
