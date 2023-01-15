@@ -18,8 +18,8 @@ router.use('/user',user);
 router.use('/offers', offers);
 router.use('/resetdb', resetDb);
 
-router.get("*", (req, res) => {
+router.get("*", (_: any, res: any) => {
     res.sendFile(path.join(__dirname, '../../client/index.html'));
 });
 
-module.exports = router;
+export default router;

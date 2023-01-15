@@ -1,7 +1,7 @@
 import path from 'path';
 import multer from 'multer';
 require('dotenv').config();
-// import routes from './routes';
+import routes from './routes';
 
 import express from 'express';
 import morgan from 'morgan';
@@ -49,6 +49,6 @@ server.use(express.static(path.join(__dirname, '../client')));
 //   server.use(express.static(path.join(__dirname, "../client")));
 // }
 
-// server.use('/', routes);
+server.use('/', routes);
 
 export default server;
