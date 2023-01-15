@@ -1,6 +1,7 @@
-const { Router } = require('express');
+import { Router } from 'express';
+import { getBrands, postBrands, updateBrands, deleteBrands } from '../../controllers/brands';
+
 const router = Router();
-const { getBrands, postBrands, updateBrands, deleteBrands } = require('../../controllers/brands')
 
 router.get('/', getBrands);
 router.post('/', postBrands);

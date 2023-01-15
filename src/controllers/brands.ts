@@ -1,6 +1,8 @@
-const { Brand } = require('../db');
+import db from '../db'
 
-async function getBrands(req, res) {
+const {Brand} = db;
+
+export const getBrands = async (_: any, res: any) => {
     try {
         const brands = await Brand.findAll()
         return res.send(brands);
@@ -9,7 +11,7 @@ async function getBrands(req, res) {
     }
 }
 
-async function postBrands(req, res) {
+export const postBrands = async (req: any, res: any) => {
     const { name } = req.body;
     try {
         if (name) {
@@ -25,7 +27,7 @@ async function postBrands(req, res) {
     }
 }
 
-async function updateBrands(req, res) {
+export const updateBrands = async (req: any, res: any) => {
     const { id, name } = req.body;
     if (!id) return res.status(422).send({ error: 'The brand id is required' });
     if (!name) return res.status(422).send({ error: 'You should specified the new name.' });
@@ -41,7 +43,7 @@ async function updateBrands(req, res) {
     }
 }
 
-async function deleteBrands(req, res) {
+export const deleteBrands = async (req: any, res: any) => {
     const { id } = req.body;
     if (!id) return res.send({ error: 'The brand id is required' })
     const brand = await Brand.findByPk(id)
@@ -56,11 +58,4 @@ async function deleteBrands(req, res) {
     } catch (err) {
         console.log('ERROR in deleteBrand', err);
     }
-}
-
-module.exports = {
-    getBrands,
-    postBrands,
-    updateBrands,
-    deleteBrands
 }
