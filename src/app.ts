@@ -1,11 +1,12 @@
 import path from 'path';
 import multer from 'multer';
-require('dotenv').config();
 import routes from './routes';
 
 import express from 'express';
 import morgan from 'morgan';
 import cors, { CorsOptions } from 'cors';
+
+require('dotenv').config();
 // Settings for let access the localhost:3000 front-end app (using cors middleware)
 const config: CorsOptions = {
   origin: "*",

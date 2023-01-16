@@ -1,5 +1,7 @@
-const { Packing } = require('../db');
-const packing = require('../data/packing.json')
+import db from '../db'
+
+const { Packing } = db;
+import packing from '../data/packing.json';
 
 const bulkCreatePacking = async() => {
     try {
@@ -7,8 +9,4 @@ const bulkCreatePacking = async() => {
     } catch(err){
         console.log('ERROR in bulkCreatePacking', err);
     }
-}
-
-module.exports = {
-    bulkCreatePacking
 }

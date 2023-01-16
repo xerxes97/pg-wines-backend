@@ -1,6 +1,8 @@
-const { Packing } = require('../db');
+import db from '../db'
 
-async function getPacking(req, res) {
+const {Packing} = db;
+
+export const getPacking = async (_: any, res: any) => {
     try {
         const packing = await Packing.findAll()
         return res.send(packing);
@@ -9,7 +11,7 @@ async function getPacking(req, res) {
     }
 }
 
-async function postPacking(req, res) {
+export const postPacking = async (req: any, res: any) => {
     const { name } = req.body;
     try {
         if (name) {
@@ -25,7 +27,7 @@ async function postPacking(req, res) {
     }
 }
 
-async function updatePacking(req, res) {
+export const updatePacking = async (req: any, res: any) => {
     const { id, name } = req.body;
     if (!id) return res.status(422).send({ error: 'The packing id is required' });
     if (!name) return res.status(422).send({ error: 'You should specified the new name.' });
@@ -41,7 +43,7 @@ async function updatePacking(req, res) {
     }
 }
 
-async function deletePacking(req, res) {
+export const deletePacking = async (req: any, res: any) => {
     const { id } = req.body;
     if (!id) return res.send({ error: 'The packing id is required' })
     const packing = await Packing.findByPk(id)
@@ -56,11 +58,4 @@ async function deletePacking(req, res) {
     } catch (err) {
         console.log('ERROR in deletePacking', err);
     }
-}
-
-module.exports = {
-    getPacking,
-    postPacking,
-    updatePacking,
-    deletePacking
 }

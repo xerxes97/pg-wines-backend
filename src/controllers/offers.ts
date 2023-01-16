@@ -1,15 +1,19 @@
+import db from '../db'
+import cloudinary from 'cloudinary';
+import fs from 'fs-extra';
+
 require('dotenv').config();
-const { Offer } = require('../db');
-const cloudinary = require('cloudinary');
-cloudinary.config({
+const {Offer} = db;
+
+cloudinary.v2.config({
     cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
     api_key: process.env.CLOUDINARY_API_KEY,
     api_secret: process.env.CLOUDINARY_API_SECRET
 });
-const fs = require('fs-extra');
 
 
-async function getOffers(req, res) {
+
+export const getOffers = async (_: any, res: any) => {
     try {
         const offers = await Offer.findAll()
         return res.send(offers);
@@ -18,7 +22,7 @@ async function getOffers(req, res) {
     }
 }
 
-async function postOffer(req, res) {
+export const postOffer = async (req: any, res: any) => {
     const { status, slug, productId } = req.body;
     const image = req.file? req.file.filename : undefined;
     try {
@@ -40,7 +44,7 @@ async function postOffer(req, res) {
     }
 }
 
-async function updateOffer(req, res) {
+export const updateOffer = async (req: any, res: any) => {
     const { id, status, slug, productId } = req.body;
     const image = req.file? req.file.filename : undefined;
     if (!id) return res.status(422).send({ error: 'The offer id is required' });
@@ -59,7 +63,7 @@ async function updateOffer(req, res) {
     }
 }
 
-async function deleteOffer(req, res) {
+export const deleteOffer = async (req: any, res: any) => {
     const { id } = req.body;
     if (!id) return res.send({ error: 'The offer id is required' })
     const offer = await Offer.findByPk(id)
@@ -74,11 +78,4 @@ async function deleteOffer(req, res) {
     } catch (err) {
         console.log('ERROR in deleteOffer', err);
     }
-}
-
-module.exports = {
-    getOffers,
-    postOffer,
-    updateOffer,
-    deleteOffer
 }

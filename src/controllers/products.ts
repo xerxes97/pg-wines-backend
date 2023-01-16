@@ -1,19 +1,20 @@
 require('dotenv').config();
-const { Op } = require('sequelize');
-const { Product,Category,Brand } = require('../db');
-const cloudinary = require('cloudinary');
-cloudinary.config({
+import { Op } from 'sequelize';
+import db from '../db'
+import cloudinary from 'cloudinary';
+import fs from 'fs-extra';
+//TODO: create an interface with the cloudinary config default
+cloudinary.v2.config({
     cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
     api_key: process.env.CLOUDINARY_API_KEY,
     api_secret: process.env.CLOUDINARY_API_SECRET
 });
-const fs = require('fs-extra');
 
-
+const { Product, Category, Brand } = db;
 
 const exclude= ['createdAt', 'updatedAt','categoryId','brandId']
 
-async function getProducts(req, res) {
+export const getProducts = async (req: any, res: any) => {
     let { name, categoryId,page,orderBy,orderType,initPrice,finalPrice, brand,itemsPerPage} = req.query;
     const validate = ['null', undefined, 'undefined', '']
     if(validate.includes(name))name="";
@@ -81,7 +82,7 @@ async function getProducts(req, res) {
 
 
 
-async function getProductById(req, res) {
+export const getProductById = async (req: any, res: any) => {
     const { id } = req.params;
     try {
         if (!id) return res.status(422).send({ error: 'The product id is required' });
@@ -110,7 +111,7 @@ async function getProductById(req, res) {
     }
 }
 
-async function postProduct(req, res) {
+export const postProduct = async (req: any, res: any) => {
     //required fields: name, cost, capacity, categoryId, brandId, packingId
     //non required fields:  stock=0, description="", discount=0, image=[], sales=0, 
     const { 
@@ -128,7 +129,7 @@ async function postProduct(req, res) {
                 description,
                 discount,
                 capacity,
-                image: result ? result.secure_url.split() : [],
+                image: result ? result.secure_url.split('') : [],
                 sales
             });
             await createdProduct.setCategory(categoryId);
@@ -144,7 +145,7 @@ async function postProduct(req, res) {
     }
 }
 
-async function updateProduct(req, res) {
+export const updateProduct = async (req: any, res: any) => {
     //required fields: name, cost, capacity, categoryId, brandId, packingId
     //non required fields:  stock=0, description="", discount=0, image=[], sales=0, 
     const { 
@@ -175,7 +176,7 @@ async function updateProduct(req, res) {
         console.log('ERROR in updateProduct', err);
     }
 }
-async function deleteProduct(req, res) {
+export const deleteProduct = async (req: any, res: any) => {
     const { id } = req.body;
     if (!id) return res.send({ error: 'The product id is required' })
     const prod = await Product.findByPk(id)
@@ -190,16 +191,4 @@ async function deleteProduct(req, res) {
     } catch (err) {
         console.log('ERROR in deleteProduct', err);
     }
-}
-
-
-
-
-
-module.exports = {
-    getProducts,
-    getProductById,
-    postProduct,
-    updateProduct,
-    deleteProduct
 }
