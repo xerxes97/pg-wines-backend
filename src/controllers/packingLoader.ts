@@ -3,7 +3,7 @@ import db from '../db'
 const { Packing } = db;
 import packing from '../data/packing.json';
 
-const bulkCreatePacking = async() => {
+export const bulkCreatePacking = async() => {
     try {
         await Packing.bulkCreate(packing);
     } catch(err){

@@ -3,6 +3,7 @@ import fs from 'fs';
 import path from 'path';
 const config = require(__dirname + '/config/config.ts').dev;
 const Sequelize = require('sequelize');
+const { DataTypes } = require("Sequelize");
 const db: any = {};
 
 const sequelize = new Sequelize(config);
@@ -37,13 +38,14 @@ Product.belongsTo(Category);
 
 Brand.hasMany(Product);
 Product.belongsTo(Brand, {
-  foreignKey: "brandId"
+  foreignKey: "BrandId",
+  type: DataTypes.UU
 });
 
 Packing.hasMany(Product);
 Product.belongsTo(Packing, {
-  foreignKey: "packingId",
-  as: "packing",
+  foreignKey: "PackingId",
+  type: DataTypes.UUID
 });
 
 Product.hasOne(Offer);

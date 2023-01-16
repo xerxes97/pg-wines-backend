@@ -1,10 +1,11 @@
-const { Router } = require('express');
+import { Router } from 'express';
+import { getOffers, postOffer, updateOffer, deleteOffer } from '../../controllers/offers';
+
 const router = Router();
-const { getOffers, postOffer, updateOffer, deleteOffer } = require('../../controllers/offers')
 
 router.get('/', getOffers);
 router.post('/', postOffer);
 router.put('/update', updateOffer);
 router.delete('/delete', deleteOffer);
 
-module.exports = router;
+export default router;

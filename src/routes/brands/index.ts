@@ -8,4 +8,4 @@ router.post('/', postBrands);
 router.put('/update', updateBrands);
 router.delete('/delete', deleteBrands);
 
-module.exports = router;
+export default router;

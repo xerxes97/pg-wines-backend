@@ -1,10 +1,11 @@
-const { Router } = require('express');
+import { Router } from 'express';
+import { getPacking, postPacking, updatePacking, deletePacking } from '../../controllers/packing';
+
 const router = Router();
-const { getPacking, postPacking, updatePacking, deletePacking } = require('../../controllers/packing')
 
 router.get('/', getPacking);
 router.post('/', postPacking);
 router.put('/update', updatePacking);
 router.delete('/delete', deletePacking);
 
-module.exports = router;
+export default router;

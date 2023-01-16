@@ -1,14 +1,15 @@
-const { User} = require('../../db');
-const { v4: uuidv4 } = require('uuid');
-const { Op } = require("sequelize");
+import db from '../../db'
+import { v4 as uuidv4 } from 'uuid';
+import { Op } from "sequelize";
 
+const { User } = db;
 const exclude = ['createdAt', 'updatedAt']
 
-async function newUser(req, res, next) {
+export const newUser = async (req: any, res: any, _: any) => {
     if (!req.body.displayName || !req.body.email || !req.body.password) {
         return res.status(400).json({ message: 'Bad request' })        
     }
-    const photoURL=null;
+    let photoURL=null;
     if(req.body.photoURL)photoURL=req.body.photoURL
     const { email, displayName, password} = req.body
     try {
@@ -26,7 +27,7 @@ async function newUser(req, res, next) {
     }
 }
 
-async function updateUser(req, res, next) {
+export const updateUser = async (req: any, res: any, _: any) => {
     const { idUser} = req.body
     try {
         const user = await User.findByPk(idUser)
@@ -41,7 +42,7 @@ async function updateUser(req, res, next) {
 };
 
 
-async function getAllUsers(req, res, next) {
+export const getAllUsers = async (req: any, res: any, next: any) => {
     let {displayName, admin} = req.query
     if(displayName === 'undefined') displayName = ''
     if(admin === 'undefined') admin = undefined
@@ -65,7 +66,7 @@ async function getAllUsers(req, res, next) {
     }
 }
 
-async function deleteUser(req, res, next) {
+export const deleteUser = async (req: any, res: any, next: any) => {
     if (!req.params.idUser) {
         return res.status(400).json({ message: 'ID of the user is needed', status: 400 })
     }
@@ -84,7 +85,7 @@ async function deleteUser(req, res, next) {
 
 
 
-async function loginUser(req, res, next) {
+export const loginUser = async (req: any, res: any, next: any) => {
     const {email, displayName, password} = req.body
     if(displayName) {
         try {
@@ -104,13 +105,4 @@ async function loginUser(req, res, next) {
             next(err)
         }
     }
-}
-
-
-module.exports = {
-    updateUser,
-    getAllUsers,
-    deleteUser,
-    loginUser,
-    newUser
 }

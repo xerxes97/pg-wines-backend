@@ -118,7 +118,7 @@ export const postProduct = async (req: any, res: any) => {
         name, cost, capacity, categoryId, brandId, packingId,
         stock, description, discount, sales 
     } = req.body;
-    const image = req.file? req.file.filename : undefined;
+    // const image = req.file? req.file.filename : undefined;
     try {
         if (name && cost && capacity && categoryId && brandId && packingId) {
             const result = req.file ? await cloudinary.v2.uploader.upload(req.file.path) : undefined;

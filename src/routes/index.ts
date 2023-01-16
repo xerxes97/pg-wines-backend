@@ -1,12 +1,12 @@
-const path = require('path');
-const {Router} = require('express');
-const products = require('./products');
+import path from 'path';
+import { Router } from 'express';
+import products from './products';
 import categories from './categories';
-const brands = require('./brands');
-const packing = require('./packing');
-const user= require('./user/user');
-const offers = require('./offers');
-const resetDb = require('./resetDb');
+import brands from './brands';
+import packing from './packing';
+import user from './user/user';
+import offers from './offers';
+import resetDb from './resetDb';
 
 const router = Router();
 

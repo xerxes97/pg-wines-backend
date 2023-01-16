@@ -3,7 +3,7 @@ import productsDb from '../data/products.json';
 
 const {Product} = db;
 
-const bulkCreateProducts = async () => {
+export const bulkCreateProducts = async () => {
     try {
         await Product.bulkCreate(productsDb);
     } catch(err){

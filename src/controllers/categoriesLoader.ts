@@ -3,7 +3,7 @@ import categoriesDb from '../data/categories.json';
 
 const { Category } = db;
 
-const bulkCreateCategories = async () => {
+export const bulkCreateCategories = async () => {
     try {        
         await Category.bulkCreate(categoriesDb);
     } catch(err){
